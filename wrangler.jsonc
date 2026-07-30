@@ -5,14 +5,9 @@
   "compatibility_date": "2026-07-29",
   "compatibility_flags": ["nodejs_compat"],
   "workers_dev": true,
-  "d1_databases": [
-    {
-      "binding": "DB",
-      "database_name": "rajab-consultations",
-      "database_id": "00000000-0000-0000-0000-000000000000",
-      "migrations_dir": "migrations"
-    }
-  ],
+  // D1 binding removed temporarily to allow deployment without a configured
+  // D1 database. If you have a D1 database, replace this comment with the
+  // d1_databases array and set "database_id" to your database's ID.
   "vars": {
     "SITE_URL": "https://rajab-alaboud-site-cloudflare.workers.dev",
     "NOTIFICATION_EMAIL": "rajabalaboud@gmail.com",
