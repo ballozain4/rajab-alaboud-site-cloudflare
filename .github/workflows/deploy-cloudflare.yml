@@ -29,6 +29,19 @@ jobs:
         run: npm run build
         env:
           NODE_ENV: production
+          # The site key is public, but it must be available at Astro build time
+          # so the Turnstile widget is rendered in the generated HTML.
+          PUBLIC_TURNSTILE_SITE_KEY: ${{ secrets.PUBLIC_TURNSTILE_SITE_KEY }}
+          SITE_URL: ${{ vars.SITE_URL }}
+
+      - name: Verify Turnstile site key was provided
+        run: |
+          if [ -z "$PUBLIC_TURNSTILE_SITE_KEY" ]; then
+            echo "PUBLIC_TURNSTILE_SITE_KEY is not configured in GitHub Actions secrets."
+            exit 1
+          fi
+        env:
+          PUBLIC_TURNSTILE_SITE_KEY: ${{ secrets.PUBLIC_TURNSTILE_SITE_KEY }}
 
       - name: Verify Cloudflare auth
         run: npx wrangler whoami
