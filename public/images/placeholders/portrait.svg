@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 820" role="img" aria-labelledby="t d">
+  <title id="t">الصورة الشخصية</title><desc id="d">مساحة مؤقتة لصورة رجب العبود الأصلية</desc>
+  <rect width="720" height="820" rx="120" fill="#e6efeb"/>
+  <circle cx="360" cy="278" r="118" fill="#bdd2ca"/>
+  <path d="M146 703c15-165 102-254 214-254s199 89 214 254" fill="#fff" stroke="#174e4a" stroke-width="10"/>
+  <path d="M284 463l76 89 76-89" fill="none" stroke="#b8895a" stroke-width="9"/>
+  <rect x="169" y="697" width="382" height="72" rx="36" fill="#174e4a"/>
+  <text x="360" y="742" text-anchor="middle" font-size="30" fill="#fff" font-family="Tahoma, Arial">[الصورة الشخصية الأصلية]</text>
+</svg>

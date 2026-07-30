@@ -1,0 +1,137 @@
+---
+import type { CaseStudy, DisplayFieldDefinition, HomeSettings } from '../types';
+import Icon from './Icon.astro';
+
+interface Props {
+  item: CaseStudy;
+  consultationLabel: HomeSettings['cases']['consultationLabel'];
+  hidden?: boolean;
+}
+
+const { item, consultationLabel, hidden = false } = Astro.props;
+const displayType = item.displayType === 'single-result'
+  ? 'single-result'
+  : item.displayType === 'before-after-gallery'
+    ? 'before-after-gallery'
+    : 'before-after';
+const resultImage = item.resultImage || item.afterImage;
+const additionalImages = Array.isArray(item.additionalImages) ? item.additionalImages.filter(Boolean).slice(0, 20) : [];
+const placeholderAlt = item.placeholder ? ' — صورة تجريبية' : '';
+const allFields = [...(item.fields || [])].sort((a, b) => a.order - b.order);
+const orderedFields = allFields.filter((field) => field.visible);
+const valueFor = (field: DisplayFieldDefinition) => field.builtin
+  ? String(item[field.id as 'procedure' | 'description' | 'performed' | 'procedureDate' | 'sessions' | 'duration' | 'notes'] || '')
+  : String(item.customFields?.[field.id] || '');
+const procedureField = allFields.find((field) => field.id === 'procedure');
+const showProcedure = procedureField?.visible !== false;
+const cardFields = orderedFields.filter((field) => field.id !== 'procedure' && field.placement === 'card' && valueFor(field));
+const detailFields = orderedFields.filter((field) => field.id !== 'procedure' && field.placement === 'details' && valueFor(field));
+---
+<article class="card case-card" data-reveal-item data-case-display-type={displayType} hidden={hidden}>
+  <button
+    class:list={['comparison', 'comparison-button', { 'single-result': displayType === 'single-result' }]}
+    type="button"
+    data-dialog-open={`case-${item.slug}`}
+    aria-haspopup="dialog"
+    aria-label={`عرض تفاصيل ${item.title}`}
+    data-analytics-event="case_open"
+    data-analytics-label={item.slug}
+  >
+    {displayType !== 'single-result' ? (
+      <>
+        <span class="comparison-item">
+          <img src={item.beforeImage} alt={`قبل — ${item.title}${placeholderAlt}`} width="720" height="720" loading="lazy" decoding="async" />
+          <span class="comparison-label">قبل</span>
+        </span>
+        <span class="comparison-item">
+          <img src={item.afterImage} alt={`بعد — ${item.title}${placeholderAlt}`} width="720" height="720" loading="lazy" decoding="async" />
+          <span class="comparison-label">بعد</span>
+        </span>
+      </>
+    ) : (
+      <span class="comparison-item">
+        <img src={resultImage} alt={`النتيجة النهائية — ${item.title}${placeholderAlt}`} width="1440" height="720" loading="lazy" decoding="async" />
+        <span class="comparison-label">النتيجة النهائية</span>
+      </span>
+    )}
+  </button>
+
+  <div class="card-body">
+    {showProcedure && procedureField?.placement === 'card' && <div class="pill case-procedure">{item.procedure}</div>}
+    <h3>
+      <button
+        class="case-title-button"
+        type="button"
+        data-dialog-open={`case-${item.slug}`}
+        aria-haspopup="dialog"
+        data-analytics-event="case_open"
+        data-analytics-label={item.slug}
+      >{item.title}</button>
+    </h3>
+    {cardFields.map((field) => (
+      field.id === 'description'
+        ? <p class="muted">{valueFor(field)}</p>
+        : <p class="case-card-extra"><b>{field.label}</b><span>{valueFor(field)}</span></p>
+    ))}
+    {item.placeholder && <span class="pill placeholder-pill">حالة تجريبية</span>}
+    <button class="card-link text-button" type="button" data-dialog-open={`case-${item.slug}`} aria-haspopup="dialog" data-analytics-event="case_open" data-analytics-label={item.slug}>
+      عرض التفاصيل <span aria-hidden="true">←</span>
+    </button>
+  </div>
+
+  <dialog class="content-dialog" id={`case-${item.slug}`} aria-labelledby={`case-title-${item.slug}`}>
+    <div class="dialog-shell">
+      <div class="dialog-header">
+        <div>{showProcedure && procedureField?.placement === 'details' && <span class="pill">{item.procedure}</span>}<h2 id={`case-title-${item.slug}`}>{item.title}</h2></div>
+        <button class="icon-button" type="button" data-dialog-close aria-label="إغلاق نافذة تفاصيل الحالة"><Icon name="close" size={22} /></button>
+      </div>
+
+      <div class:list={['comparison', 'dialog-comparison', { 'single-result': displayType === 'single-result' }]}>
+        {displayType !== 'single-result' ? (
+          <>
+            <span class="comparison-item">
+              <img src={item.beforeImage} alt={`قبل — ${item.title}`} width="720" height="720" />
+              <span class="comparison-label">قبل</span>
+            </span>
+            <span class="comparison-item">
+              <img src={item.afterImage} alt={`بعد — ${item.title}`} width="720" height="720" />
+              <span class="comparison-label">بعد</span>
+            </span>
+          </>
+        ) : (
+          <span class="comparison-item">
+            <img src={resultImage} alt={`النتيجة النهائية — ${item.title}`} width="1440" height="720" />
+            <span class="comparison-label">النتيجة النهائية</span>
+          </span>
+        )}
+      </div>
+
+      <div class="dialog-body">
+        {detailFields.length > 0 && <dl class="detail-list">
+          {detailFields.map((field) => <div><dt>{field.label}</dt><dd>{valueFor(field)}</dd></div>)}
+        </dl>}
+        {displayType === 'before-after-gallery' && additionalImages.length > 0 && (
+          <section class="case-additional-gallery" aria-labelledby={`case-gallery-${item.slug}`}>
+            <h3 id={`case-gallery-${item.slug}`}>صور إضافية للحالة</h3>
+            <div>
+              {additionalImages.map((image, index) => (
+                <a href={image} target="_blank" rel="noopener">
+                  <img
+                    src={image}
+                    alt={`صورة إضافية ${index + 1} — ${item.title}${placeholderAlt}`}
+                    width="720"
+                    height="720"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </a>
+              ))}
+            </div>
+          </section>
+        )}
+        <div class="notice notice-info">النتائج تختلف من شخص إلى آخر ولا تمثل ضماناً لنتيجة مماثلة.</div>
+        <a class="button button-primary" href="#consultation" data-consultation-focus>{consultationLabel}</a>
+      </div>
+    </div>
+  </dialog>
+</article>

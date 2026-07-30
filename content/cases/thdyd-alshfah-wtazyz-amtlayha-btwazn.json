@@ -1,0 +1,95 @@
+{
+  "slug": "thdyd-alshfah-wtazyz-amtlayha-btwazn",
+  "title": "تحديد الشفاه وتعزيز امتلائها بتوازن",
+  "category": "فيلر للشفاه",
+  "procedure": "فيلر للشفاه",
+  "description": "تعزيز مدروس لحجم الشفاه وتحديد حوافها وتحسين تناسقها باستخدام الفيلر، مع اختيار الكمية والتقنية وفق شكل الشفاه ونسب الوجه، بهدف الحصول على نتيجة متوازنة تحافظ على المظهر الطبيعي.",
+  "performed": "",
+  "procedureDate": "",
+  "sessions": "1",
+  "duration": "7 أيام",
+  "displayType": "before-after",
+  "beforeImage": "/images/uploads/1785277673664-img-20250508-wa0021.jpg",
+  "afterImage": "/images/uploads/1785277673683-img-20250508-wa0033.jpg",
+  "resultImage": "",
+  "additionalImages": [],
+  "notes": "",
+  "fields": [
+    {
+      "id": "procedure",
+      "label": "الخدمة أو الإجراء",
+      "type": "text",
+      "placement": "card",
+      "required": true,
+      "visible": true,
+      "builtin": true,
+      "order": 10
+    },
+    {
+      "id": "description",
+      "label": "الوصف",
+      "type": "textarea",
+      "placement": "details",
+      "required": true,
+      "visible": true,
+      "builtin": true,
+      "order": 20
+    },
+    {
+      "id": "performed",
+      "label": "ما تم تنفيذه",
+      "type": "textarea",
+      "placement": "details",
+      "required": false,
+      "visible": false,
+      "builtin": true,
+      "order": 30
+    },
+    {
+      "id": "procedureDate",
+      "label": "تاريخ الإجراء",
+      "type": "text",
+      "placement": "details",
+      "required": false,
+      "visible": true,
+      "builtin": true,
+      "order": 40
+    },
+    {
+      "id": "sessions",
+      "label": "عدد الجلسات",
+      "type": "text",
+      "placement": "details",
+      "required": false,
+      "visible": true,
+      "builtin": true,
+      "order": 50
+    },
+    {
+      "id": "duration",
+      "label": "المدة",
+      "type": "text",
+      "placement": "details",
+      "required": false,
+      "visible": true,
+      "builtin": true,
+      "order": 60
+    },
+    {
+      "id": "notes",
+      "label": "ملاحظات",
+      "type": "textarea",
+      "placement": "details",
+      "required": false,
+      "visible": false,
+      "builtin": true,
+      "order": 70
+    }
+  ],
+  "customFields": {},
+  "status": "published",
+  "featured": true,
+  "placeholder": false,
+  "order": 20,
+  "visible": true
+}

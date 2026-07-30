@@ -1,0 +1,51 @@
+---
+import Icon from './Icon.astro';
+import { whatsappUrl } from '../lib/content';
+import type { SiteSettings } from '../types';
+
+interface Props { site: SiteSettings; biography: string; minimal?: boolean; }
+const { site, biography, minimal = false } = Astro.props;
+const year = new Date().getFullYear();
+---
+<footer class="site-footer">
+  <div class="container">
+    {!minimal && <div class="footer-grid">
+      <section aria-labelledby="footer-about-title">
+        <h2 class="footer-title" id="footer-about-title">{site.name}</h2>
+        <p class="footer-role">{site.title}</p>
+        <p class="small">{biography}</p>
+      </section>
+
+      <section aria-labelledby="footer-contact-title">
+        <h3 id="footer-contact-title">التواصل</h3>
+        <div class="footer-links footer-contact-links">
+          <a href={`mailto:${site.email}`}><Icon name="mail" size={18} /> {site.email}</a>
+          <a href={whatsappUrl('مرحباً، وصلت إلى موقع رجب العبود وأرغب في الاستفسار.', site.whatsapp)} target="_blank" rel="noopener" data-analytics-event="whatsapp_click"><Icon name="whatsapp" size={18} /> {site.phoneDisplay}</a>
+          <a href={site.instagram} target="_blank" rel="noopener"><Icon name="instagram" size={18} /> إنستغرام</a>
+          <a href={site.facebook} target="_blank" rel="noopener"><Icon name="facebook" size={18} /> فيسبوك</a>
+        </div>
+      </section>
+
+      <section aria-labelledby="footer-quick-title">
+        <h3 id="footer-quick-title">روابط سريعة</h3>
+        <div class="footer-links">
+          <a href="/#consultation" data-analytics-event="consultation_cta">طلب استشارة</a>
+          <a href="/#services">الخدمات</a>
+          <a href="/#cases">معرض الأعمال</a>
+        </div>
+      </section>
+
+      <section aria-labelledby="footer-more-title">
+        <h3 id="footer-more-title">المزيد</h3>
+        <div class="footer-links">
+          <a href="/achievements/">الإنجازات</a>
+          <a href="/policies/">السياسات</a>
+        </div>
+      </section>
+    </div>}
+    <div class="footer-bottom">
+      <span>© {year} {site.name}. جميع الحقوق محفوظة.</span>
+      <span>الاستشارة الأولية لا تمثل تشخيصاً طبياً.</span>
+    </div>
+  </div>
+</footer>

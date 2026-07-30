@@ -1,0 +1,24 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import PlaceholderNotice from '../components/PlaceholderNotice.astro';
+import { getPublicContent } from '../lib/server-content';
+const content = await getPublicContent();
+const { about } = content;
+const achievements = content.achievements.filter((item) => item.visible !== false);
+const hasPlaceholders = achievements.some((item) => item.placeholder) || about.graduationProject.includes('[');
+const achievementFields = (item: (typeof achievements)[number]) =>
+  [...(item.fields || [])].filter((field) => field.visible).sort((a, b) => a.order - b.order);
+const achievementValue = (item: (typeof achievements)[number], field: (typeof item.fields)[number]) =>
+  field.builtin
+    ? String(item[field.id as 'year' | 'description'] || '')
+    : String(item.customFields?.[field.id] || '');
+const graduationField = [...(about.fields || [])].find((field) => field.id === 'graduationProject' && field.visible);
+const qualificationField = [...(about.fields || [])].find((field) => field.id === 'qualification' && field.visible);
+---
+<BaseLayout title="الإنجازات والشهادات" description="الشهادات ومشروع التخرج والإنجازات الموثقة لرجب العبود.">
+  <PageHeader title="الإنجازات والشهادات" eyebrow="معلومات قابلة للتحقق" description="لن تُنشر شهادة أو جائزة أو مؤهل قبل توفر الاسم والصورة والجهة والتاريخ بصورة دقيقة." />
+  {hasPlaceholders && <section class="section-tight"><div class="container"><PlaceholderNotice /></div></section>}
+  <section class="section"><div class="container"><div class="grid grid-2">{achievements.map((item) => <article class="card"><img src={item.image} alt={`صورة ${item.title}`} width="800" height="560" loading="lazy" /><div class="card-body">{item.placeholder && <span class="pill placeholder-pill">بيانات تجريبية</span>}<h2>{item.title}</h2><dl class="achievement-fields">{achievementFields(item).map((field) => achievementValue(item, field) && <div><dt>{field.label}</dt><dd>{achievementValue(item, field)}</dd></div>)}</dl></div></article>)}</div></div></section>
+  {graduationField && <section class="section surface-section"><div class="container"><div class="card form-card graduation-project-card"><p class="eyebrow">{graduationField.label}</p>{qualificationField && <h2>{about.qualification}</h2>}<p class="lead">{about.graduationProject}</p></div></div></section>}
+</BaseLayout>

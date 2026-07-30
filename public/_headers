@@ -1,0 +1,15 @@
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
+  X-Frame-Options: DENY
+
+/local-dashboard/*
+  Cache-Control: no-store
+  X-Robots-Tag: noindex, nofollow
+
+/_assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/images/*
+  Cache-Control: public, max-age=604800

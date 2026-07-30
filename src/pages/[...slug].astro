@@ -1,0 +1,25 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageSectionRenderer from '../components/PageSectionRenderer.astro';
+import { getPublicContent } from '../lib/server-content';
+
+const content = await getPublicContent();
+const slug = Astro.params.slug || '';
+const reserved = new Set(['home', 'achievements', 'policies', 'admin', 'local-dashboard', 'api']);
+const page = reserved.has(slug.split('/')[0])
+  ? undefined
+  : content.pages.find((item) => item.slug === slug && item.status === 'published' && !item.isHomepage);
+if (!page) return Astro.redirect('/404/', 302);
+---
+<BaseLayout
+  title={page.seo.title || page.title}
+  description={page.seo.description}
+  image={page.seo.image || undefined}
+  noindex={page.seo.noindex}
+  headerMode={page.headerMode}
+  footerMode={page.footerMode}
+>
+  <div id="top" class:list={['managed-page', `managed-page-${page.pageKind}`]}>
+    {page.sections.filter((section) => section.visible).map((section) => <PageSectionRenderer section={section} content={content} />)}
+  </div>
+</BaseLayout>

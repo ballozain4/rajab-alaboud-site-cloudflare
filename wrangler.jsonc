@@ -1,0 +1,21 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "rajab-alaboud-site-cloudflare",
+  "main": "@astrojs/cloudflare/entrypoints/server",
+  "compatibility_date": "2026-07-29",
+  "compatibility_flags": ["nodejs_compat"],
+  "workers_dev": true,
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "rajab-consultations",
+      "database_id": "00000000-0000-0000-0000-000000000000",
+      "migrations_dir": "migrations"
+    }
+  ],
+  "vars": {
+    "SITE_URL": "https://rajab-alaboud-site-cloudflare.workers.dev",
+    "NOTIFICATION_EMAIL": "rajabalaboud@gmail.com",
+    "ALLOW_DEMO_SUBMISSIONS": "false"
+  }
+}

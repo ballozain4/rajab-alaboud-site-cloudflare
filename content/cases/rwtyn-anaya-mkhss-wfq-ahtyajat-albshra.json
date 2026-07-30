@@ -1,0 +1,95 @@
+{
+  "slug": "rwtyn-anaya-mkhss-wfq-ahtyajat-albshra",
+  "title": "روتين عناية مخصص وفق احتياجات البشرة",
+  "category": "روتين للبشرة",
+  "procedure": "روتين للبشرة",
+  "description": "تقييم حالة البشرة والعادات اليومية والمنتجات المستخدمة، ثم تصميم روتين مبسط ومخصص يحدد خطوات التنظيف والترطيب والحماية من الشمس والمكونات الفعالة المناسبة، مع تجنب المنتجات غير الضرورية أو غير المتوافقة مع البشرة.",
+  "performed": "",
+  "procedureDate": "",
+  "sessions": "1",
+  "duration": "55 يوماً",
+  "displayType": "before-after",
+  "beforeImage": "/images/uploads/1785277673760-img-20260517-003111.jpg",
+  "afterImage": "/images/uploads/1785277673794-img-20260517-003125.jpg",
+  "resultImage": "",
+  "additionalImages": [],
+  "notes": "",
+  "fields": [
+    {
+      "id": "procedure",
+      "label": "الخدمة أو الإجراء",
+      "type": "text",
+      "placement": "card",
+      "required": true,
+      "visible": true,
+      "builtin": true,
+      "order": 10
+    },
+    {
+      "id": "description",
+      "label": "الوصف",
+      "type": "textarea",
+      "placement": "details",
+      "required": true,
+      "visible": true,
+      "builtin": true,
+      "order": 20
+    },
+    {
+      "id": "performed",
+      "label": "ما تم تنفيذه",
+      "type": "textarea",
+      "placement": "details",
+      "required": false,
+      "visible": false,
+      "builtin": true,
+      "order": 30
+    },
+    {
+      "id": "procedureDate",
+      "label": "تاريخ الإجراء",
+      "type": "text",
+      "placement": "details",
+      "required": false,
+      "visible": true,
+      "builtin": true,
+      "order": 40
+    },
+    {
+      "id": "sessions",
+      "label": "عدد الجلسات",
+      "type": "text",
+      "placement": "details",
+      "required": false,
+      "visible": true,
+      "builtin": true,
+      "order": 50
+    },
+    {
+      "id": "duration",
+      "label": "المدة",
+      "type": "text",
+      "placement": "details",
+      "required": false,
+      "visible": true,
+      "builtin": true,
+      "order": 60
+    },
+    {
+      "id": "notes",
+      "label": "ملاحظات",
+      "type": "textarea",
+      "placement": "details",
+      "required": false,
+      "visible": false,
+      "builtin": true,
+      "order": 70
+    }
+  ],
+  "customFields": {},
+  "status": "published",
+  "featured": true,
+  "placeholder": false,
+  "order": 60,
+  "visible": true
+}

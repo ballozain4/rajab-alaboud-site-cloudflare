@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 720" role="img" aria-labelledby="t d">
+  <title id="t">صورة بعد</title><desc id="d">مساحة مؤقتة لصورة بعد الأصلية</desc>
+  <rect width="720" height="720" rx="36" fill="#e6efeb"/>
+  <circle cx="360" cy="293" r="116" fill="#bdd2ca"/>
+  <path d="M179 620c20-134 91-205 181-205s161 71 181 205" fill="#cadbd5"/>
+  <rect x="228" y="638" width="264" height="54" rx="27" fill="#174e4a"/>
+  <text x="360" y="674" text-anchor="middle" font-size="29" fill="#fff" font-family="Tahoma, Arial">[صورة بعد]</text>
+</svg>

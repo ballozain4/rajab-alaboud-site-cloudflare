@@ -1,0 +1,168 @@
+{
+  "serviceFields": [
+    {
+      "id": "category",
+      "label": "التصنيف",
+      "type": "textarea",
+      "placement": "details",
+      "required": true,
+      "visible": true,
+      "builtin": true,
+      "order": 10
+    },
+    {
+      "id": "summary",
+      "label": "الوصف المختصر",
+      "type": "textarea",
+      "placement": "card",
+      "required": true,
+      "visible": true,
+      "builtin": true,
+      "order": 20
+    },
+    {
+      "id": "description",
+      "label": "الوصف التفصيلي",
+      "type": "textarea",
+      "placement": "details",
+      "required": true,
+      "visible": true,
+      "builtin": true,
+      "order": 30
+    },
+    {
+      "id": "suitableFor",
+      "label": "الفئة المستهدفة",
+      "type": "textarea",
+      "placement": "details",
+      "required": false,
+      "visible": true,
+      "builtin": true,
+      "order": 40
+    },
+    {
+      "id": "notes",
+      "label": "الملاحظات والتنبيهات",
+      "type": "textarea",
+      "placement": "details",
+      "required": false,
+      "visible": true,
+      "builtin": true,
+      "order": 50
+    }
+  ],
+  "consultationFields": [
+    {
+      "id": "name",
+      "label": "الاسم الكامل",
+      "type": "text",
+      "placeholder": "",
+      "helpText": "",
+      "options": [],
+      "required": true,
+      "visible": true,
+      "fullWidth": false,
+      "builtin": true,
+      "order": 10
+    },
+    {
+      "id": "phone",
+      "label": "رقم الهاتف أو واتساب",
+      "type": "tel",
+      "placeholder": "+963 9XX XXX XXX",
+      "helpText": "الافتراضي سوريا، ويمكن إدخال أي رقم دولي مسبوقاً برمز الدولة.",
+      "options": [],
+      "required": true,
+      "visible": true,
+      "fullWidth": false,
+      "builtin": true,
+      "order": 20
+    },
+    {
+      "id": "city",
+      "label": "المحافظة",
+      "type": "select",
+      "placeholder": "اختر المحافظة",
+      "helpText": "",
+      "options": [
+        "دمشق",
+        "ريف دمشق",
+        "حمص",
+        "حماة",
+        "حلب",
+        "إدلب",
+        "اللاذقية",
+        "طرطوس",
+        "درعا",
+        "السويداء",
+        "القنيطرة",
+        "دير الزور",
+        "الرقة",
+        "الحسكة",
+        "أخرى"
+      ],
+      "required": true,
+      "visible": true,
+      "fullWidth": false,
+      "builtin": true,
+      "order": 30
+    },
+    {
+      "id": "consultationType",
+      "label": "نوع الاستشارة",
+      "type": "select",
+      "placeholder": "اختر نوع الاستشارة",
+      "helpText": "",
+      "options": [
+        "استشارة عن خدمة تجميلية",
+        "استشارة عن البشرة وروتين العناية",
+        "استشارة عن إزالة الشعر بالليزر",
+        "استفسار عام"
+      ],
+      "required": true,
+      "visible": true,
+      "fullWidth": true,
+      "builtin": true,
+      "order": 40
+    },
+    {
+      "id": "subject",
+      "label": "الخدمة أو المشكلة المطلوبة",
+      "type": "text",
+      "placeholder": "مثال: روتين لبشرة دهنية أو استفسار عن الليزر",
+      "helpText": "",
+      "options": [],
+      "required": true,
+      "visible": true,
+      "fullWidth": true,
+      "builtin": true,
+      "order": 50
+    },
+    {
+      "id": "description",
+      "label": "وصف مختصر",
+      "type": "textarea",
+      "placeholder": "اكتب احتياجك باختصار، من دون معلومات صحية حساسة.",
+      "helpText": "هذا الحقل اختياري. لا يمكن رفع الصور حالياً؛ يمكن إرسالها لاحقاً عبر واتساب عند الحاجة.",
+      "options": [],
+      "required": false,
+      "visible": true,
+      "fullWidth": true,
+      "builtin": true,
+      "order": 60
+    },
+    {
+      "id": "privacy",
+      "label": "أوافق على استخدام بياناتي لمعالجة طلب الاستشارة والتواصل بشأنه عبر واتساب عند الحاجة.",
+      "type": "checkbox",
+      "placeholder": "",
+      "helpText": "",
+      "options": [],
+      "required": true,
+      "visible": true,
+      "fullWidth": true,
+      "builtin": true,
+      "order": 70
+    }
+  ]
+}

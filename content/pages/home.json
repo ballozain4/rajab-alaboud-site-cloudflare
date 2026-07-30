@@ -1,0 +1,1521 @@
+{
+  "id": "home",
+  "title": "الصفحة الرئيسية",
+  "slug": "home",
+  "navigationLabel": "الرئيسية",
+  "status": "published",
+  "pageKind": "standard",
+  "isHomepage": true,
+  "showInNavigation": true,
+  "headerMode": "full",
+  "footerMode": "full",
+  "seo": {
+    "title": "رجب العبود | اختصاصي في التجميل والعناية بالبشرة",
+    "description": "استشارة أولية مجانية تساعد على تحديد الخدمة أو خيارات العناية المناسبة ضمن تجربة عربية واضحة وسريعة.",
+    "image": "/images/placeholders/portrait.svg",
+    "noindex": false
+  },
+  "sections": [
+    {
+      "id": "home-hero",
+      "type": "hero",
+      "name": "الواجهة الرئيسية",
+      "visible": true,
+      "fields": [
+        {
+          "id": "eyebrow",
+          "label": "السطر التعريفي",
+          "type": "text",
+          "placement": "card",
+          "required": false,
+          "visible": true,
+          "builtin": true,
+          "order": 10
+        },
+        {
+          "id": "title",
+          "label": "العنوان",
+          "type": "text",
+          "placement": "card",
+          "required": true,
+          "visible": true,
+          "builtin": true,
+          "order": 20
+        },
+        {
+          "id": "description",
+          "label": "الوصف",
+          "type": "textarea",
+          "placement": "card",
+          "required": false,
+          "visible": true,
+          "builtin": true,
+          "order": 30
+        },
+        {
+          "id": "image",
+          "label": "مسار الصورة الرئيسية",
+          "type": "text",
+          "placement": "details",
+          "required": false,
+          "visible": true,
+          "builtin": true,
+          "order": 40
+        },
+        {
+          "id": "imageAlt",
+          "label": "النص البديل للصورة",
+          "type": "text",
+          "placement": "details",
+          "required": false,
+          "visible": true,
+          "builtin": true,
+          "order": 50
+        },
+        {
+          "id": "buttonLabel",
+          "label": "نص الزر الرئيسي",
+          "type": "text",
+          "placement": "details",
+          "required": false,
+          "visible": true,
+          "builtin": true,
+          "order": 60
+        },
+        {
+          "id": "buttonUrl",
+          "label": "رابط الزر الرئيسي",
+          "type": "text",
+          "placement": "details",
+          "required": false,
+          "visible": true,
+          "builtin": true,
+          "order": 70
+        },
+        {
+          "id": "secondaryButtonLabel",
+          "label": "نص الزر الثانوي",
+          "type": "text",
+          "placement": "details",
+          "required": false,
+          "visible": true,
+          "builtin": true,
+          "order": 80
+        },
+        {
+          "id": "secondaryButtonUrl",
+          "label": "رابط الزر الثانوي",
+          "type": "text",
+          "placement": "details",
+          "required": false,
+          "visible": true,
+          "builtin": true,
+          "order": 90
+        }
+      ],
+      "customFields": {},
+      "style": {
+        "background": "primary",
+        "backgroundColor": "",
+        "textColor": "",
+        "accentColor": "",
+        "buttonColor": "",
+        "width": "wide",
+        "spacing": "large",
+        "alignment": "start",
+        "imagePosition": "end",
+        "columns": 3
+      },
+      "content": {
+        "eyebrow": "استشارة أولية مجانية",
+        "title": "اعرف نقطة البداية المناسبة لبشرتك",
+        "description": "أرسل معلومات مختصرة عن احتياجك، وسنتابع معك لتحديد الخدمة أو خيارات العناية التي تستحق المناقشة.",
+        "image": "",
+        "imageAlt": "",
+        "buttonLabel": "اطلب استشارة مجانية",
+        "buttonUrl": "#consultation",
+        "secondaryButtonLabel": "",
+        "secondaryButtonUrl": "",
+        "source": "manual",
+        "limit": 3,
+        "items": []
+      }
+    },
+    {
+      "id": "about",
+      "type": "about-profile",
+      "name": "بطاقة رجب العبود",
+      "visible": true,
+      "fields": [
+        {
+          "id": "eyebrow",
+          "label": "السطر التعريفي",
+          "type": "text",
+          "placement": "card",
+          "required": false,
+          "visible": true,
+          "builtin": true,
+          "order": 10
+        },
+        {
+          "id": "title",
+          "label": "العنوان",
+          "type": "text",
+          "placement": "card",
+          "required": true,
+          "visible": true,
+          "builtin": true,
+          "order": 20
+        },
+        {
+          "id": "description",
+          "label": "الوصف",
+          "type": "textarea",
+          "placement": "card",
+          "required": false,
+          "visible": true,
+          "builtin": true,
+          "order": 30
+        },
+        {
+          "id": "image",
+          "label": "مسار الصورة الرئيسية",
+          "type": "text",
+          "placement": "details",
+          "required": false,
+          "visible": true,
+          "builtin": true,
+          "order": 40
+        },
+        {
+          "id": "imageAlt",
+          "label": "النص البديل للصورة",
+          "type": "text",
+          "placement": "details",
+          "required": false,
+          "visible": true,
+          "builtin": true,
+          "order": 50
+        },
+        {
+          "id": "buttonLabel",
+          "label": "نص الزر الرئيسي",
+          "type": "text",
+          "placement": "details",
+          "required": false,
+          "visible": true,
+          "builtin": true,
+          "order": 60
+        },
+        {
+          "id": "buttonUrl",
+          "label": "رابط الزر الرئيسي",
+          "type": "text",
+          "placement": "details",
+          "required": false,
+          "visible": true,
+          "builtin": true,
+          "order": 70
+        },
+        {
+          "id": "secondaryButtonLabel",
+          "label": "نص الزر الثانوي",
+          "type": "text",
+          "placement": "details",
+          "required": false,
+          "visible": true,
+          "builtin": true,
+          "order": 80
+        },
+        {
+          "id": "secondaryButtonUrl",
+          "label": "رابط الزر الثانوي",
+          "type": "text",
+          "placement": "details",
+          "required": false,
+          "visible": true,
+          "builtin": true,
+          "order": 90
+        }
+      ],
+      "customFields": {},
+      "style": {
+        "background": "default",
+        "backgroundColor": "",
+        "textColor": "",
+        "accentColor": "",
+        "buttonColor": "",
+        "width": "normal",
+        "spacing": "normal",
+        "alignment": "start",
+        "imagePosition": "start",
+        "columns": 2
+      },
+      "content": {
+        "eyebrow": "العناية تبدأ بفهم الاحتياج",
+        "title": "رجب العبود",
+        "description": "",
+        "image": "",
+        "imageAlt": "",
+        "buttonLabel": "إظهار المزيد",
+        "buttonUrl": "",
+        "secondaryButtonLabel": "",
+        "secondaryButtonUrl": "",
+        "source": "about",
+        "limit": 3,
+        "items": []
+      }
+    },
+    {
+      "id": "quick-start",
+      "type": "features",
+      "name": "ابدأ من هنا",
+      "visible": true,
+      "fields": [
+        {
+          "id": "eyebrow",
+          "label": "السطر التعريفي",
+          "type": "text",
+          "placement": "card",
+          "required": false,
+          "visible": true,
+          "builtin": true,
+          "order": 10
+        },
+        {
+          "id": "title",
+          "label": "العنوان",
+          "type": "text",
+          "placement": "card",
+          "required": true,
+          "visible": true,
+          "builtin": true,
+          "order": 20
+        },
+        {
+          "id": "description",
+          "label": "الوصف",
+          "type": "textarea",
+          "placement": "card",
+          "required": false,
+          "visible": true,
+          "builtin": true,
+          "order": 30
+        },
+        {
+          "id": "image",
+          "label": "مسار الصورة الرئيسية",
+          "type": "text",
+          "placement": "details",
+          "required": false,
+          "visible": true,
+          "builtin": true,
+          "order": 40
+        },
+        {
+          "id": "imageAlt",
+          "label": "النص البديل للصورة",
+          "type": "text",
+          "placement": "details",
+          "required": false,
+          "visible": true,
+          "builtin": true,
+          "order": 50
+        },
+        {
+          "id": "buttonLabel",
+          "label": "نص الزر الرئيسي",
+          "type": "text",
+          "placement": "details",
+          "required": false,
+          "visible": true,
+          "builtin": true,
+          "order": 60
+        },
+        {
+          "id": "buttonUrl",
+          "label": "رابط الزر الرئيسي",
+          "type": "text",
+          "placement": "details",
+          "required": false,
+          "visible": true,
+          "builtin": true,
+          "order": 70
+        },
+        {
+          "id": "secondaryButtonLabel",
+          "label": "نص الزر الثانوي",
+          "type": "text",
+          "placement": "details",
+          "required": false,
+          "visible": true,
+          "builtin": true,
+          "order": 80
+        },
+        {
+          "id": "secondaryButtonUrl",
+          "label": "رابط الزر الثانوي",
+          "type": "text",
+          "placement": "details",
+          "required": false,
+          "visible": true,
+          "builtin": true,
+          "order": 90
+        }
+      ],
+      "customFields": {},
+      "style": {
+        "background": "default",
+        "backgroundColor": "",
+        "textColor": "",
+        "accentColor": "",
+        "buttonColor": "",
+        "width": "wide",
+        "spacing": "small",
+        "alignment": "center",
+        "imagePosition": "end",
+        "columns": 3
+      },
+      "content": {
+        "eyebrow": "ابدأ من هنا",
+        "title": "اختر المسار الأقرب لاحتياجك",
+        "description": "يمكنك طلب استشارة أولية أو تصفح الخدمات والحالات المنشورة.",
+        "image": "",
+        "imageAlt": "",
+        "buttonLabel": "",
+        "buttonUrl": "",
+        "secondaryButtonLabel": "",
+        "secondaryButtonUrl": "",
+        "source": "manual",
+        "limit": 3,
+        "items": [
+          {
+            "id": "consultation-link",
+            "title": "طلب استشارة",
+            "text": "ابدأ بطلب مجاني يساعد على تحديد الخطوة المناسبة.",
+            "image": "",
+            "imageAlt": "",
+            "value": "",
+            "label": "",
+            "url": "#consultation",
+            "fields": [
+              {
+                "id": "title",
+                "label": "العنوان",
+                "type": "text",
+                "placement": "card",
+                "required": false,
+                "visible": true,
+                "builtin": true,
+                "order": 10
+              },
+              {
+                "id": "value",
+                "label": "القيمة الرقمية",
+                "type": "text",
+                "placement": "card",
+                "required": false,
+                "visible": true,
+                "builtin": true,
+                "order": 20
+              },
+              {
+                "id": "label",
+                "label": "التسمية",
+                "type": "text",
+                "placement": "card",
+                "required": false,
+                "visible": true,
+                "builtin": true,
+                "order": 30
+              },
+              {
+                "id": "text",
+                "label": "النص",
+                "type": "textarea",
+                "placement": "card",
+                "required": false,
+                "visible": true,
+                "builtin": true,
+                "order": 40
+              },
+              {
+                "id": "image",
+                "label": "مسار الصورة",
+                "type": "text",
+                "placement": "details",
+                "required": false,
+                "visible": true,
+                "builtin": true,
+                "order": 50
+              },
+              {
+                "id": "imageAlt",
+                "label": "النص البديل للصورة",
+                "type": "text",
+                "placement": "details",
+                "required": false,
+                "visible": true,
+                "builtin": true,
+                "order": 60
+              },
+              {
+                "id": "url",
+                "label": "الرابط",
+                "type": "text",
+                "placement": "details",
+                "required": false,
+                "visible": true,
+                "builtin": true,
+                "order": 70
+              }
+            ],
+            "customFields": {}
+          },
+          {
+            "id": "services-link",
+            "title": "الخدمات",
+            "text": "اطّلع على الخدمات ثم اطلب ما يهمك.",
+            "image": "",
+            "imageAlt": "",
+            "value": "",
+            "label": "",
+            "url": "#services",
+            "fields": [
+              {
+                "id": "title",
+                "label": "العنوان",
+                "type": "text",
+                "placement": "card",
+                "required": false,
+                "visible": true,
+                "builtin": true,
+                "order": 10
+              },
+              {
+                "id": "value",
+                "label": "القيمة الرقمية",
+                "type": "text",
+                "placement": "card",
+                "required": false,
+                "visible": true,
+                "builtin": true,
+                "order": 20
+              },
+              {
+                "id": "label",
+                "label": "التسمية",
+                "type": "text",
+                "placement": "card",
+                "required": false,
+                "visible": true,
+                "builtin": true,
+                "order": 30
+              },
+              {
+                "id": "text",
+                "label": "النص",
+                "type": "textarea",
+                "placement": "card",
+                "required": false,
+                "visible": true,
+                "builtin": true,
+                "order": 40
+              },
+              {
+                "id": "image",
+                "label": "مسار الصورة",
+                "type": "text",
+                "placement": "details",
+                "required": false,
+                "visible": true,
+                "builtin": true,
+                "order": 50
+              },
+              {
+                "id": "imageAlt",
+                "label": "النص البديل للصورة",
+                "type": "text",
+                "placement": "details",
+                "required": false,
+                "visible": true,
+                "builtin": true,
+                "order": 60
+              },
+              {
+                "id": "url",
+                "label": "الرابط",
+                "type": "text",
+                "placement": "details",
+                "required": false,
+                "visible": true,
+                "builtin": true,
+                "order": 70
+              }
+            ],
+            "customFields": {}
+          },
+          {
+            "id": "cases-link",
+            "title": "معرض الأعمال",
+            "text": "شاهد نماذج الأعمال المصرّح بنشرها.",
+            "image": "",
+            "imageAlt": "",
+            "value": "",
+            "label": "",
+            "url": "#cases",
+            "fields": [
+              {
+                "id": "title",
+                "label": "العنوان",
+                "type": "text",
+                "placement": "card",
+                "required": false,
+                "visible": true,
+                "builtin": true,
+                "order": 10
+              },
+              {
+                "id": "value",
+                "label": "القيمة الرقمية",
+                "type": "text",
+                "placement": "card",
+                "required": false,
+                "visible": true,
+                "builtin": true,
+                "order": 20
+              },
+              {
+                "id": "label",
+                "label": "التسمية",
+                "type": "text",
+                "placement": "card",
+                "required": false,
+                "visible": true,
+                "builtin": true,
+                "order": 30
+              },
+              {
+                "id": "text",
+                "label": "النص",
+                "type": "textarea",
+                "placement": "card",
+                "required": false,
+                "visible": true,
+                "builtin": true,
+                "order": 40
+              },
+              {
+                "id": "image",
+                "label": "مسار الصورة",
+                "type": "text",
+                "placement": "details",
+                "required": false,
+                "visible": true,
+                "builtin": true,
+                "order": 50
+              },
+              {
+                "id": "imageAlt",
+                "label": "النص البديل للصورة",
+                "type": "text",
+                "placement": "details",
+                "required": false,
+                "visible": true,
+                "builtin": true,
+                "order": 60
+              },
+              {
+                "id": "url",
+                "label": "الرابط",
+                "type": "text",
+                "placement": "details",
+                "required": false,
+                "visible": true,
+                "builtin": true,
+                "order": 70
+              }
+            ],
+            "customFields": {}
+          }
+        ]
+      }
+    },
+    {
+      "id": "consultation-steps",
+      "type": "steps",
+      "name": "كيف تتم الاستشارة",
+      "visible": true,
+      "fields": [
+        {
+          "id": "eyebrow",
+          "label": "السطر التعريفي",
+          "type": "text",
+          "placement": "card",
+          "required": false,
+          "visible": true,
+          "builtin": true,
+          "order": 10
+        },
+        {
+          "id": "title",
+          "label": "العنوان",
+          "type": "text",
+          "placement": "card",
+          "required": true,
+          "visible": true,
+          "builtin": true,
+          "order": 20
+        },
+        {
+          "id": "description",
+          "label": "الوصف",
+          "type": "textarea",
+          "placement": "card",
+          "required": false,
+          "visible": true,
+          "builtin": true,
+          "order": 30
+        },
+        {
+          "id": "image",
+          "label": "مسار الصورة الرئيسية",
+          "type": "text",
+          "placement": "details",
+          "required": false,
+          "visible": true,
+          "builtin": true,
+          "order": 40
+        },
+        {
+          "id": "imageAlt",
+          "label": "النص البديل للصورة",
+          "type": "text",
+          "placement": "details",
+          "required": false,
+          "visible": true,
+          "builtin": true,
+          "order": 50
+        },
+        {
+          "id": "buttonLabel",
+          "label": "نص الزر الرئيسي",
+          "type": "text",
+          "placement": "details",
+          "required": false,
+          "visible": true,
+          "builtin": true,
+          "order": 60
+        },
+        {
+          "id": "buttonUrl",
+          "label": "رابط الزر الرئيسي",
+          "type": "text",
+          "placement": "details",
+          "required": false,
+          "visible": true,
+          "builtin": true,
+          "order": 70
+        },
+        {
+          "id": "secondaryButtonLabel",
+          "label": "نص الزر الثانوي",
+          "type": "text",
+          "placement": "details",
+          "required": false,
+          "visible": true,
+          "builtin": true,
+          "order": 80
+        },
+        {
+          "id": "secondaryButtonUrl",
+          "label": "رابط الزر الثانوي",
+          "type": "text",
+          "placement": "details",
+          "required": false,
+          "visible": true,
+          "builtin": true,
+          "order": 90
+        }
+      ],
+      "customFields": {},
+      "style": {
+        "background": "surface",
+        "backgroundColor": "",
+        "textColor": "",
+        "accentColor": "",
+        "buttonColor": "",
+        "width": "wide",
+        "spacing": "normal",
+        "alignment": "center",
+        "imagePosition": "end",
+        "columns": 3
+      },
+      "content": {
+        "eyebrow": "ثلاث خطوات واضحة",
+        "title": "كيف تتم الاستشارة الأولية؟",
+        "description": "مسار مختصر يحفظ طلبك برقم متابعة، ثم ينقلك إلى التواصل المباشر عند الحاجة.",
+        "image": "",
+        "imageAlt": "",
+        "buttonLabel": "",
+        "buttonUrl": "",
+        "secondaryButtonLabel": "",
+        "secondaryButtonUrl": "",
+        "source": "manual",
+        "limit": 3,
+        "items": [
+          {
+            "id": "consultation-step-submit",
+            "title": "أرسل طلبك",
+            "text": "أدخل بيانات التواصل ووصفاً مختصراً لاحتياجك من دون معلومات صحية حساسة أو صور.",
+            "image": "",
+            "imageAlt": "",
+            "value": "",
+            "label": "",
+            "url": "",
+            "fields": [
+              {
+                "id": "title",
+                "label": "العنوان",
+                "type": "text",
+                "placement": "card",
+                "required": false,
+                "visible": true,
+                "builtin": true,
+                "order": 10
+              },
+              {
+                "id": "value",
+                "label": "القيمة الرقمية",
+                "type": "text",
+                "placement": "card",
+                "required": false,
+                "visible": true,
+                "builtin": true,
+                "order": 20
+              },
+              {
+                "id": "label",
+                "label": "التسمية",
+                "type": "text",
+                "placement": "card",
+                "required": false,
+                "visible": true,
+                "builtin": true,
+                "order": 30
+              },
+              {
+                "id": "text",
+                "label": "النص",
+                "type": "textarea",
+                "placement": "card",
+                "required": false,
+                "visible": true,
+                "builtin": true,
+                "order": 40
+              },
+              {
+                "id": "image",
+                "label": "مسار الصورة",
+                "type": "text",
+                "placement": "details",
+                "required": false,
+                "visible": true,
+                "builtin": true,
+                "order": 50
+              },
+              {
+                "id": "imageAlt",
+                "label": "النص البديل للصورة",
+                "type": "text",
+                "placement": "details",
+                "required": false,
+                "visible": true,
+                "builtin": true,
+                "order": 60
+              },
+              {
+                "id": "url",
+                "label": "الرابط",
+                "type": "text",
+                "placement": "details",
+                "required": false,
+                "visible": true,
+                "builtin": true,
+                "order": 70
+              }
+            ],
+            "customFields": {}
+          },
+          {
+            "id": "consultation-step-review",
+            "title": "تتم مراجعة الطلب",
+            "text": "يُحفظ الطلب بأمان مع رقم متابعة، ثم تُراجع المعلومات لتحديد أفضل طريقة للمتابعة.",
+            "image": "",
+            "imageAlt": "",
+            "value": "",
+            "label": "",
+            "url": "",
+            "fields": [
+              {
+                "id": "title",
+                "label": "العنوان",
+                "type": "text",
+                "placement": "card",
+                "required": false,
+                "visible": true,
+                "builtin": true,
+                "order": 10
+              },
+              {
+                "id": "value",
+                "label": "القيمة الرقمية",
+                "type": "text",
+                "placement": "card",
+                "required": false,
+                "visible": true,
+                "builtin": true,
+                "order": 20
+              },
+              {
+                "id": "label",
+                "label": "التسمية",
+                "type": "text",
+                "placement": "card",
+                "required": false,
+                "visible": true,
+                "builtin": true,
+                "order": 30
+              },
+              {
+                "id": "text",
+                "label": "النص",
+                "type": "textarea",
+                "placement": "card",
+                "required": false,
+                "visible": true,
+                "builtin": true,
+                "order": 40
+              },
+              {
+                "id": "image",
+                "label": "مسار الصورة",
+                "type": "text",
+                "placement": "details",
+                "required": false,
+                "visible": true,
+                "builtin": true,
+                "order": 50
+              },
+              {
+                "id": "imageAlt",
+                "label": "النص البديل للصورة",
+                "type": "text",
+                "placement": "details",
+                "required": false,
+                "visible": true,
+                "builtin": true,
+                "order": 60
+              },
+              {
+                "id": "url",
+                "label": "الرابط",
+                "type": "text",
+                "placement": "details",
+                "required": false,
+                "visible": true,
+                "builtin": true,
+                "order": 70
+              }
+            ],
+            "customFields": {}
+          },
+          {
+            "id": "consultation-step-contact",
+            "title": "نتواصل معك",
+            "text": "تتم المتابعة عبر الهاتف أو واتساب، ويمكن إرسال الصور لاحقاً عند الحاجة.",
+            "image": "",
+            "imageAlt": "",
+            "value": "",
+            "label": "",
+            "url": "",
+            "fields": [
+              {
+                "id": "title",
+                "label": "العنوان",
+                "type": "text",
+                "placement": "card",
+                "required": false,
+                "visible": true,
+                "builtin": true,
+                "order": 10
+              },
+              {
+                "id": "value",
+                "label": "القيمة الرقمية",
+                "type": "text",
+                "placement": "card",
+                "required": false,
+                "visible": true,
+                "builtin": true,
+                "order": 20
+              },
+              {
+                "id": "label",
+                "label": "التسمية",
+                "type": "text",
+                "placement": "card",
+                "required": false,
+                "visible": true,
+                "builtin": true,
+                "order": 30
+              },
+              {
+                "id": "text",
+                "label": "النص",
+                "type": "textarea",
+                "placement": "card",
+                "required": false,
+                "visible": true,
+                "builtin": true,
+                "order": 40
+              },
+              {
+                "id": "image",
+                "label": "مسار الصورة",
+                "type": "text",
+                "placement": "details",
+                "required": false,
+                "visible": true,
+                "builtin": true,
+                "order": 50
+              },
+              {
+                "id": "imageAlt",
+                "label": "النص البديل للصورة",
+                "type": "text",
+                "placement": "details",
+                "required": false,
+                "visible": true,
+                "builtin": true,
+                "order": 60
+              },
+              {
+                "id": "url",
+                "label": "الرابط",
+                "type": "text",
+                "placement": "details",
+                "required": false,
+                "visible": true,
+                "builtin": true,
+                "order": 70
+              }
+            ],
+            "customFields": {}
+          }
+        ]
+      }
+    },
+    {
+      "id": "consultation",
+      "type": "consultation-form",
+      "name": "نموذج الاستشارة",
+      "visible": true,
+      "fields": [
+        {
+          "id": "eyebrow",
+          "label": "السطر التعريفي",
+          "type": "text",
+          "placement": "card",
+          "required": false,
+          "visible": true,
+          "builtin": true,
+          "order": 10
+        },
+        {
+          "id": "title",
+          "label": "العنوان",
+          "type": "text",
+          "placement": "card",
+          "required": true,
+          "visible": true,
+          "builtin": true,
+          "order": 20
+        },
+        {
+          "id": "description",
+          "label": "الوصف",
+          "type": "textarea",
+          "placement": "card",
+          "required": false,
+          "visible": true,
+          "builtin": true,
+          "order": 30
+        },
+        {
+          "id": "image",
+          "label": "مسار الصورة الرئيسية",
+          "type": "text",
+          "placement": "details",
+          "required": false,
+          "visible": true,
+          "builtin": true,
+          "order": 40
+        },
+        {
+          "id": "imageAlt",
+          "label": "النص البديل للصورة",
+          "type": "text",
+          "placement": "details",
+          "required": false,
+          "visible": true,
+          "builtin": true,
+          "order": 50
+        },
+        {
+          "id": "buttonLabel",
+          "label": "نص الزر الرئيسي",
+          "type": "text",
+          "placement": "details",
+          "required": false,
+          "visible": true,
+          "builtin": true,
+          "order": 60
+        },
+        {
+          "id": "buttonUrl",
+          "label": "رابط الزر الرئيسي",
+          "type": "text",
+          "placement": "details",
+          "required": false,
+          "visible": true,
+          "builtin": true,
+          "order": 70
+        },
+        {
+          "id": "secondaryButtonLabel",
+          "label": "نص الزر الثانوي",
+          "type": "text",
+          "placement": "details",
+          "required": false,
+          "visible": true,
+          "builtin": true,
+          "order": 80
+        },
+        {
+          "id": "secondaryButtonUrl",
+          "label": "رابط الزر الثانوي",
+          "type": "text",
+          "placement": "details",
+          "required": false,
+          "visible": true,
+          "builtin": true,
+          "order": 90
+        }
+      ],
+      "customFields": {},
+      "style": {
+        "background": "surface",
+        "backgroundColor": "",
+        "textColor": "",
+        "accentColor": "",
+        "buttonColor": "",
+        "width": "normal",
+        "spacing": "normal",
+        "alignment": "start",
+        "imagePosition": "end",
+        "columns": 2
+      },
+      "content": {
+        "eyebrow": "خطوتك الأولى",
+        "title": "سجّل طلب استشارة أولية",
+        "description": "شارك معلومات أساسية غير حساسة، وسنتابع معك عبر واتساب لمناقشة الخطوة المناسبة.",
+        "image": "",
+        "imageAlt": "",
+        "buttonLabel": "تسجيل طلب الاستشارة",
+        "buttonUrl": "",
+        "secondaryButtonLabel": "",
+        "secondaryButtonUrl": "",
+        "source": "contact",
+        "limit": 3,
+        "items": []
+      }
+    },
+    {
+      "id": "services",
+      "type": "services-grid",
+      "name": "الخدمات",
+      "visible": true,
+      "fields": [
+        {
+          "id": "eyebrow",
+          "label": "السطر التعريفي",
+          "type": "text",
+          "placement": "card",
+          "required": false,
+          "visible": true,
+          "builtin": true,
+          "order": 10
+        },
+        {
+          "id": "title",
+          "label": "العنوان",
+          "type": "text",
+          "placement": "card",
+          "required": true,
+          "visible": true,
+          "builtin": true,
+          "order": 20
+        },
+        {
+          "id": "description",
+          "label": "الوصف",
+          "type": "textarea",
+          "placement": "card",
+          "required": false,
+          "visible": true,
+          "builtin": true,
+          "order": 30
+        },
+        {
+          "id": "image",
+          "label": "مسار الصورة الرئيسية",
+          "type": "text",
+          "placement": "details",
+          "required": false,
+          "visible": true,
+          "builtin": true,
+          "order": 40
+        },
+        {
+          "id": "imageAlt",
+          "label": "النص البديل للصورة",
+          "type": "text",
+          "placement": "details",
+          "required": false,
+          "visible": true,
+          "builtin": true,
+          "order": 50
+        },
+        {
+          "id": "buttonLabel",
+          "label": "نص الزر الرئيسي",
+          "type": "text",
+          "placement": "details",
+          "required": false,
+          "visible": true,
+          "builtin": true,
+          "order": 60
+        },
+        {
+          "id": "buttonUrl",
+          "label": "رابط الزر الرئيسي",
+          "type": "text",
+          "placement": "details",
+          "required": false,
+          "visible": true,
+          "builtin": true,
+          "order": 70
+        },
+        {
+          "id": "secondaryButtonLabel",
+          "label": "نص الزر الثانوي",
+          "type": "text",
+          "placement": "details",
+          "required": false,
+          "visible": true,
+          "builtin": true,
+          "order": 80
+        },
+        {
+          "id": "secondaryButtonUrl",
+          "label": "رابط الزر الثانوي",
+          "type": "text",
+          "placement": "details",
+          "required": false,
+          "visible": true,
+          "builtin": true,
+          "order": 90
+        }
+      ],
+      "customFields": {},
+      "style": {
+        "background": "default",
+        "backgroundColor": "",
+        "textColor": "",
+        "accentColor": "",
+        "buttonColor": "",
+        "width": "wide",
+        "spacing": "normal",
+        "alignment": "start",
+        "imagePosition": "end",
+        "columns": 3
+      },
+      "content": {
+        "eyebrow": "الخدمات",
+        "title": "خيارات تبدأ من احتياجك",
+        "description": "تعرّف على الخدمات المتاحة، ثم اطلب استشارة أولية قبل اختيار ما يناسبك.",
+        "image": "",
+        "imageAlt": "",
+        "buttonLabel": "اطلب الخدمة",
+        "buttonUrl": "#consultation",
+        "secondaryButtonLabel": "",
+        "secondaryButtonUrl": "",
+        "source": "services",
+        "limit": 0,
+        "items": []
+      }
+    },
+    {
+      "id": "cases",
+      "type": "cases-gallery",
+      "name": "معرض الأعمال",
+      "visible": true,
+      "fields": [
+        {
+          "id": "eyebrow",
+          "label": "السطر التعريفي",
+          "type": "text",
+          "placement": "card",
+          "required": false,
+          "visible": true,
+          "builtin": true,
+          "order": 10
+        },
+        {
+          "id": "title",
+          "label": "العنوان",
+          "type": "text",
+          "placement": "card",
+          "required": true,
+          "visible": true,
+          "builtin": true,
+          "order": 20
+        },
+        {
+          "id": "description",
+          "label": "الوصف",
+          "type": "textarea",
+          "placement": "card",
+          "required": false,
+          "visible": true,
+          "builtin": true,
+          "order": 30
+        },
+        {
+          "id": "image",
+          "label": "مسار الصورة الرئيسية",
+          "type": "text",
+          "placement": "details",
+          "required": false,
+          "visible": true,
+          "builtin": true,
+          "order": 40
+        },
+        {
+          "id": "imageAlt",
+          "label": "النص البديل للصورة",
+          "type": "text",
+          "placement": "details",
+          "required": false,
+          "visible": true,
+          "builtin": true,
+          "order": 50
+        },
+        {
+          "id": "buttonLabel",
+          "label": "نص الزر الرئيسي",
+          "type": "text",
+          "placement": "details",
+          "required": false,
+          "visible": true,
+          "builtin": true,
+          "order": 60
+        },
+        {
+          "id": "buttonUrl",
+          "label": "رابط الزر الرئيسي",
+          "type": "text",
+          "placement": "details",
+          "required": false,
+          "visible": true,
+          "builtin": true,
+          "order": 70
+        },
+        {
+          "id": "secondaryButtonLabel",
+          "label": "نص الزر الثانوي",
+          "type": "text",
+          "placement": "details",
+          "required": false,
+          "visible": true,
+          "builtin": true,
+          "order": 80
+        },
+        {
+          "id": "secondaryButtonUrl",
+          "label": "رابط الزر الثانوي",
+          "type": "text",
+          "placement": "details",
+          "required": false,
+          "visible": true,
+          "builtin": true,
+          "order": 90
+        }
+      ],
+      "customFields": {},
+      "style": {
+        "background": "surface",
+        "backgroundColor": "",
+        "textColor": "",
+        "accentColor": "",
+        "buttonColor": "",
+        "width": "wide",
+        "spacing": "normal",
+        "alignment": "start",
+        "imagePosition": "end",
+        "columns": 3
+      },
+      "content": {
+        "eyebrow": "معرض الأعمال",
+        "title": "حالات موثقة ومصرّح بنشرها",
+        "description": "النتائج فردية وتختلف من شخص إلى آخر، ولا تمثل ضماناً لنتيجة مماثلة.",
+        "image": "",
+        "imageAlt": "",
+        "buttonLabel": "اطلب استشارة",
+        "buttonUrl": "#consultation",
+        "secondaryButtonLabel": "",
+        "secondaryButtonUrl": "",
+        "source": "cases",
+        "limit": 0,
+        "items": []
+      }
+    },
+    {
+      "id": "home-cta",
+      "type": "cta",
+      "name": "دعوة ختامية",
+      "visible": false,
+      "fields": [
+        {
+          "id": "eyebrow",
+          "label": "السطر التعريفي",
+          "type": "text",
+          "placement": "card",
+          "required": false,
+          "visible": true,
+          "builtin": true,
+          "order": 10
+        },
+        {
+          "id": "title",
+          "label": "العنوان",
+          "type": "text",
+          "placement": "card",
+          "required": true,
+          "visible": true,
+          "builtin": true,
+          "order": 20
+        },
+        {
+          "id": "description",
+          "label": "الوصف",
+          "type": "textarea",
+          "placement": "card",
+          "required": false,
+          "visible": true,
+          "builtin": true,
+          "order": 30
+        },
+        {
+          "id": "image",
+          "label": "مسار الصورة الرئيسية",
+          "type": "text",
+          "placement": "details",
+          "required": false,
+          "visible": true,
+          "builtin": true,
+          "order": 40
+        },
+        {
+          "id": "imageAlt",
+          "label": "النص البديل للصورة",
+          "type": "text",
+          "placement": "details",
+          "required": false,
+          "visible": true,
+          "builtin": true,
+          "order": 50
+        },
+        {
+          "id": "buttonLabel",
+          "label": "نص الزر الرئيسي",
+          "type": "text",
+          "placement": "details",
+          "required": false,
+          "visible": true,
+          "builtin": true,
+          "order": 60
+        },
+        {
+          "id": "buttonUrl",
+          "label": "رابط الزر الرئيسي",
+          "type": "text",
+          "placement": "details",
+          "required": false,
+          "visible": true,
+          "builtin": true,
+          "order": 70
+        },
+        {
+          "id": "secondaryButtonLabel",
+          "label": "نص الزر الثانوي",
+          "type": "text",
+          "placement": "details",
+          "required": false,
+          "visible": true,
+          "builtin": true,
+          "order": 80
+        },
+        {
+          "id": "secondaryButtonUrl",
+          "label": "رابط الزر الثانوي",
+          "type": "text",
+          "placement": "details",
+          "required": false,
+          "visible": true,
+          "builtin": true,
+          "order": 90
+        }
+      ],
+      "customFields": {},
+      "style": {
+        "background": "primary",
+        "backgroundColor": "",
+        "textColor": "",
+        "accentColor": "",
+        "buttonColor": "",
+        "width": "normal",
+        "spacing": "small",
+        "alignment": "center",
+        "imagePosition": "end",
+        "columns": 2
+      },
+      "content": {
+        "eyebrow": "ابدأ بخطوة واضحة",
+        "title": "لست متأكداً أي خدمة تناسبك؟",
+        "description": "سجّل طلب استشارة أولية، وسنتابع معك لتوضيح الخيارات الممكنة دون وعود أو تشخيص عن بُعد.",
+        "image": "",
+        "imageAlt": "",
+        "buttonLabel": "اطلب استشارة مجانية",
+        "buttonUrl": "#consultation",
+        "secondaryButtonLabel": "",
+        "secondaryButtonUrl": "",
+        "source": "manual",
+        "limit": 3,
+        "items": []
+      }
+    }
+  ],
+  "updatedAt": "2026-07-30T02:03:57.663Z"
+}

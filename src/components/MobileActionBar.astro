@@ -1,0 +1,11 @@
+---
+import Icon from './Icon.astro';
+import { whatsappUrl } from '../lib/content';
+import type { SiteSettings } from '../types';
+interface Props { site: SiteSettings; }
+const { site } = Astro.props;
+---
+<nav class="mobile-action-bar" aria-label="إجراءات سريعة">
+  <a href="/#consultation" data-analytics-event="consultation_cta"><Icon name="message" size={22} /><span>استشارة مجانية</span></a>
+  <a href={whatsappUrl('مرحباً، وصلت إلى موقع رجب العبود وأرغب في الاستفسار.', site.whatsapp)} target="_blank" rel="noopener" data-analytics-event="whatsapp_click"><Icon name="whatsapp" size={22} /><span>واتساب</span></a>
+</nav>

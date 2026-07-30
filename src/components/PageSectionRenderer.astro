@@ -1,0 +1,176 @@
+---
+import ConsultationForm from './ConsultationForm.astro';
+import ServiceCard from './ServiceCard.astro';
+import CaseCard from './CaseCard.astro';
+import Icon from './Icon.astro';
+import BuilderHeading from './BuilderHeading.astro';
+import BuilderButtons from './BuilderButtons.astro';
+import ContentFields from './ContentFields.astro';
+import type { DisplayFieldDefinition, PageSection, PublicContent } from '../types';
+
+interface Props {
+  section: PageSection;
+  content: PublicContent;
+}
+
+const { section, content } = Astro.props;
+const { site, about, home, services, cases } = content;
+const c = section.content;
+const s = section.style;
+const sectionClasses = [
+  'builder-section',
+  `builder-${section.type}`,
+  `builder-bg-${s.background}`,
+  `builder-space-${s.spacing}`,
+  `builder-align-${s.alignment}`
+];
+const sectionLabelId = section.type === 'consultation-form' ? 'consultation-title' : `${section.id}-title`;
+const customStyle = [
+  s.background === 'custom' && s.backgroundColor ? `--section-background:${s.backgroundColor}` : '',
+  s.textColor ? `--section-text:${s.textColor}` : '',
+  s.accentColor ? `--section-accent:${s.accentColor}` : '',
+  s.buttonColor ? `--section-button:${s.buttonColor}` : ''
+].filter(Boolean).join(';');
+const containerClass = s.width === 'wide' ? 'container' : s.width === 'narrow' ? 'container builder-container-narrow' : 'container builder-container-normal';
+const requestedLimit = Number(c.limit);
+const sectionLimit = requestedLimit === 0 ? 0 : Math.min(100, Math.max(1, Number.isFinite(requestedLimit) ? Math.trunc(requestedLimit) : 6));
+const visibleServices = services.filter((item) => item.visible !== false);
+const visibleCases = cases.filter((item) => item.visible !== false && item.status !== 'draft');
+const orderedServices = sectionLimit === 0 ? visibleServices : visibleServices.slice(0, sectionLimit);
+const orderedCases = sectionLimit === 0 ? visibleCases : visibleCases.slice(0, sectionLimit);
+const sectionItems = sectionLimit === 0 ? c.items : c.items.slice(0, sectionLimit);
+const aboutFields = [...(about.fields || [])].filter((field) => field.visible).sort((a, b) => a.order - b.order);
+const aboutValue = (field: DisplayFieldDefinition) => {
+  if (!field.builtin) return String(about.customFields?.[field.id] || '');
+  if (field.id === 'experienceAreas') return about.experienceAreas.join('، ');
+  return String(about[field.id as 'qualification' | 'university' | 'graduationYear' | 'graduationProject'] || '');
+};
+const aboutCardFields = aboutFields.filter((field) => field.placement === 'card' && aboutValue(field));
+const aboutDetailFields = aboutFields.filter((field) => field.placement === 'details' && aboutValue(field));
+const sectionShows = (id: string) => section.fields?.find((field) => field.id === id)?.visible !== false;
+const sectionValue = (id: keyof typeof c) => sectionShows(id) ? String(c[id] || '') : '';
+const eyebrow = sectionValue('eyebrow');
+const title = sectionValue('title');
+const description = sectionValue('description');
+const image = sectionValue('image');
+const imageAlt = sectionValue('imageAlt');
+const buttonLabel = sectionValue('buttonLabel');
+const buttonUrl = sectionValue('buttonUrl');
+const secondaryButtonLabel = sectionValue('secondaryButtonLabel');
+const secondaryButtonUrl = sectionValue('secondaryButtonUrl');
+const itemShows = (item: (typeof sectionItems)[number], id: string) =>
+  item.fields?.find((field) => field.id === id)?.visible !== false;
+const itemValue = (item: (typeof sectionItems)[number], id: 'title' | 'text' | 'image' | 'imageAlt' | 'value' | 'label' | 'url') =>
+  itemShows(item, id) ? String(item[id] || '') : '';
+---
+<section id={section.id} class:list={sectionClasses} style={customStyle || undefined} aria-labelledby={title ? sectionLabelId : undefined} aria-label={!title ? section.name : undefined}>
+  <div class={containerClass}>
+    {section.type === 'hero' && (
+      <div class:list={['builder-split', `image-${s.imagePosition}`, { 'without-image': !image }]}>
+        <div class="builder-copy">
+          {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+          {title && <h1 id={`${section.id}-title`}>{title}</h1>}
+          {description && <p class="lead">{description}</p>}
+          <BuilderButtons primaryLabel={buttonLabel} primaryUrl={buttonUrl} secondaryLabel={secondaryButtonLabel} secondaryUrl={secondaryButtonUrl} />
+        </div>
+        {image && <img class="builder-main-image" src={image} alt={imageAlt} width="820" height="680" />}
+      </div>
+    )}
+
+    {section.type === 'text-image' && (
+      <div class:list={['builder-split', `image-${s.imagePosition}`, { 'without-image': !image }]}>
+        <div class="builder-copy"><BuilderHeading id={`${section.id}-title`} eyebrow={eyebrow} title={title} description={description} /><BuilderButtons primaryLabel={buttonLabel} primaryUrl={buttonUrl} secondaryLabel={secondaryButtonLabel} secondaryUrl={secondaryButtonUrl} /></div>
+        {image && <img class="builder-main-image" src={image} alt={imageAlt} width="820" height="620" loading="lazy" />}
+      </div>
+    )}
+
+    {section.type === 'about-profile' && (
+      <article class="card builder-profile">
+        <img src={image || site.portrait} alt={imageAlt || `الصورة الشخصية لـ${site.name}`} width="340" height="340" />
+        <div>
+          {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+          <h2 id={`${section.id}-title`}>{title || site.name}</h2>
+          <p class="profile-role">{site.title}</p>
+          <p class="lead">{description || about.biography}</p>
+          {aboutCardFields.map((field) => <p class="profile-card-field"><b>{field.label}:</b> {aboutValue(field)}</p>)}
+          {c.source === 'about' ? (
+            <details class="profile-details builder-profile-details">
+              <summary>
+                <span class="details-more">{home.profile.moreLabel || 'إظهار المزيد'}</span>
+                <span class="details-less">{home.profile.lessLabel || 'إظهار أقل'}</span>
+              </summary>
+              <div class="profile-details-content">
+                <p>{about.expandedBiography}</p>
+                <dl class="mini-details">
+                  {aboutDetailFields.map((field) => <div class:list={{ 'graduation-project-detail': field.id === 'graduationProject' }}><dt>{field.label}</dt><dd>{aboutValue(field)}</dd></div>)}
+                  {about.workplaces.length > 0 && <div><dt>أماكن العمل</dt><dd>{about.workplaces.join('، ')}</dd></div>}
+                </dl>
+              </div>
+            </details>
+          ) : (
+            <BuilderButtons primaryLabel={buttonLabel} primaryUrl={buttonUrl} secondaryLabel={secondaryButtonLabel} secondaryUrl={secondaryButtonUrl} />
+          )}
+        </div>
+      </article>
+    )}
+
+    {section.type === 'services-grid' && (
+      <><BuilderHeading id={`${section.id}-title`} eyebrow={eyebrow} title={title} description={description} /><div id={section.id === 'services' ? 'services-list' : undefined} class={`grid builder-grid builder-columns-${s.columns}`}>
+        {c.source === 'services'
+          ? orderedServices.map((service, index) => <ServiceCard service={service} requestLabel={buttonLabel || 'اطلب الخدمة'} hidden={section.id === 'services' && index >= 3} />)
+          : sectionItems.map((item) => <article class="card builder-item-card">{itemValue(item, 'image') && <img src={itemValue(item, 'image')} alt={itemValue(item, 'imageAlt')} loading="lazy" />}<div class="card-body">{itemValue(item, 'title') && <h3>{itemValue(item, 'title')}</h3>}{itemValue(item, 'text') && <p>{itemValue(item, 'text')}</p>}<ContentFields fields={item.fields} values={item.customFields} placement="card" />{itemValue(item, 'url') && <a class="card-link" href={itemValue(item, 'url')}>اعرف المزيد</a>}</div></article>)}
+      </div>{section.id === 'services' && orderedServices.length > 3 && <div class="reveal-actions"><button class="button button-outline" type="button" data-reveal="services-list" data-more-label="إظهار المزيد" data-less-label="إظهار أقل" aria-expanded="false">إظهار المزيد</button></div>}</>
+    )}
+
+    {section.type === 'cases-gallery' && (
+      <><BuilderHeading id={`${section.id}-title`} eyebrow={eyebrow} title={title} description={description} /><div id={section.id === 'cases' ? 'cases-list' : undefined} class={`grid builder-grid builder-columns-${s.columns}`}>
+        {c.source === 'cases'
+          ? orderedCases.map((item, index) => <CaseCard item={item} consultationLabel={buttonLabel || 'اطلب استشارة'} hidden={section.id === 'cases' && index >= 3} />)
+          : sectionItems.map((item) => <article class="card builder-item-card">{itemValue(item, 'image') && <img src={itemValue(item, 'image')} alt={itemValue(item, 'imageAlt')} loading="lazy" />}<div class="card-body">{itemValue(item, 'title') && <h3>{itemValue(item, 'title')}</h3>}{itemValue(item, 'text') && <p>{itemValue(item, 'text')}</p>}<ContentFields fields={item.fields} values={item.customFields} placement="card" /></div></article>)}
+      </div>{section.id === 'cases' && orderedCases.length > 3 && <div class="reveal-actions"><button class="button button-outline" type="button" data-reveal="cases-list" data-more-label="إظهار المزيد" data-less-label="إظهار أقل" aria-expanded="false">إظهار المزيد</button></div>}<p class="builder-disclaimer">النتائج تختلف من شخص إلى آخر ولا تمثل ضماناً لنتيجة مماثلة.</p></>
+    )}
+
+    {(section.type === 'features' || section.type === 'steps') && (
+      <><BuilderHeading id={`${section.id}-title`} eyebrow={eyebrow} title={title} description={description} /><div class={`grid builder-grid builder-columns-${s.columns}`}>
+        {sectionItems.map((item, index) => itemValue(item, 'url')
+          ? <a class:list={['card', 'builder-feature', { 'quick-start-card': section.id === 'quick-start' }]} href={itemValue(item, 'url')}><span class="builder-feature-icon">{section.type === 'steps' ? index + 1 : <Icon name="sparkles" size={24} />}</span>{itemValue(item, 'title') && <h3>{itemValue(item, 'title')}</h3>}{itemValue(item, 'text') && <p>{itemValue(item, 'text')}</p>}<ContentFields fields={item.fields} values={item.customFields} placement="card" /></a>
+          : <article class="card builder-feature"><span class="builder-feature-icon">{section.type === 'steps' ? index + 1 : <Icon name="sparkles" size={24} />}</span>{itemValue(item, 'title') && <h3>{itemValue(item, 'title')}</h3>}{itemValue(item, 'text') && <p>{itemValue(item, 'text')}</p>}<ContentFields fields={item.fields} values={item.customFields} placement="card" /></article>)}
+      </div></>
+    )}
+
+    {section.type === 'faq' && (
+      <><BuilderHeading id={`${section.id}-title`} eyebrow={eyebrow} title={title} description={description} /><div class="builder-faq">{sectionItems.map((item) => <details class="card"><summary>{itemValue(item, 'title')}</summary>{itemValue(item, 'text') && <p>{itemValue(item, 'text')}</p>}</details>)}</div></>
+    )}
+
+    {section.type === 'testimonials' && (
+      <><BuilderHeading id={`${section.id}-title`} eyebrow={eyebrow} title={title} description={description} /><div class={`grid builder-grid builder-columns-${s.columns}`}>{sectionItems.map((item) => <figure class="card builder-quote"><blockquote>{itemValue(item, 'text')}</blockquote><figcaption>{itemValue(item, 'title')}</figcaption></figure>)}</div></>
+    )}
+
+    {section.type === 'gallery' && (
+      <><BuilderHeading id={`${section.id}-title`} eyebrow={eyebrow} title={title} description={description} /><div class={`builder-gallery-grid builder-columns-${s.columns}`}>{sectionItems.filter((item) => itemValue(item, 'image')).map((item) => <figure><img src={itemValue(item, 'image')} alt={itemValue(item, 'imageAlt') || itemValue(item, 'title')} loading="lazy" /><figcaption>{itemValue(item, 'title')}</figcaption></figure>)}</div></>
+    )}
+
+    {section.type === 'stats' && (
+      <><BuilderHeading id={`${section.id}-title`} eyebrow={eyebrow} title={title} description={description} /><div class={`grid builder-grid builder-columns-${s.columns}`}>{sectionItems.map((item) => <article class="card builder-stat"><strong>{itemValue(item, 'value')}</strong><span>{itemValue(item, 'label') || itemValue(item, 'title')}</span></article>)}</div></>
+    )}
+
+    {section.type === 'logos' && (
+      <><BuilderHeading id={`${section.id}-title`} eyebrow={eyebrow} title={title} description={description} /><div class="builder-logos">{sectionItems.filter((item) => itemValue(item, 'image')).map((item) => itemValue(item, 'url') ? <a href={itemValue(item, 'url')}><img src={itemValue(item, 'image')} alt={itemValue(item, 'imageAlt') || itemValue(item, 'title')} loading="lazy" /></a> : <img src={itemValue(item, 'image')} alt={itemValue(item, 'imageAlt') || itemValue(item, 'title')} loading="lazy" />)}</div></>
+    )}
+
+    {section.type === 'cta' && <div class="builder-cta"><BuilderHeading id={`${section.id}-title`} eyebrow={eyebrow} title={title} description={description} /><BuilderButtons primaryLabel={buttonLabel} primaryUrl={buttonUrl} secondaryLabel={secondaryButtonLabel} secondaryUrl={secondaryButtonUrl} /></div>}
+
+    {section.type === 'consultation-form' && (
+      <ConsultationForm settings={{ eyebrow, title, description, submitLabel: buttonLabel || 'تسجيل طلب الاستشارة' }} fields={content.fieldModel.consultationFields} services={services.filter((item) => item.visible !== false)} />
+    )}
+
+    {section.type === 'contact' && (
+      <><BuilderHeading id={`${section.id}-title`} eyebrow={eyebrow} title={title} description={description} /><div class="grid grid-3 builder-contact">
+        <a class="card" href={`tel:${site.phoneLink}`}><Icon name="phone" size={26} /><strong>الهاتف</strong><span>{site.phoneDisplay}</span></a>
+        <a class="card" href={`https://wa.me/${site.whatsapp}`} target="_blank" rel="noopener"><Icon name="whatsapp" size={26} /><strong>واتساب</strong><span>{site.phoneDisplay}</span></a>
+        <a class="card" href={`mailto:${site.email}`}><Icon name="mail" size={26} /><strong>البريد الإلكتروني</strong><span>{site.email}</span></a>
+      </div></>
+    )}
+    <ContentFields fields={section.fields} values={section.customFields} placement="card" className="section-custom-fields" />
+  </div>
+</section>

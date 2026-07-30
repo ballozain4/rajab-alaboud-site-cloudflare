@@ -1,0 +1,53 @@
+{
+  "name": "rajab-alaboud-site",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.12.0",
+    "npm": ">=9.6.5"
+  },
+  "scripts": {
+    "predev": "node scripts/generate-content.mjs",
+    "dev": "astro dev",
+    "predashboard": "node scripts/generate-content.mjs",
+    "dashboard": "node scripts/start-dashboard.mjs",
+    "prebuild": "node scripts/generate-content.mjs",
+    "build": "astro build",
+    "preview": "astro preview",
+    "precheck": "node scripts/generate-content.mjs",
+    "check": "astro check",
+    "pretest:smoke": "node scripts/generate-content.mjs",
+    "test:smoke": "node scripts/run-local-test.mjs tests/smoke.mjs",
+    "test:interactions": "node scripts/run-local-test.mjs tests/interactions.mjs",
+    "pretest:page-builder": "node scripts/generate-content.mjs",
+    "test:page-builder": "node scripts/run-local-test.mjs tests/page-builder.mjs",
+    "pretest:browser": "node scripts/generate-content.mjs",
+    "test:browser": "node scripts/run-local-test.mjs tests/browser.mjs",
+    "pretest:cloudflare": "npm run build",
+    "test:cloudflare": "node scripts/run-local-test.mjs tests/cloudflare.mjs",
+    "test": "npm run check && npm run test:smoke && npm run test:interactions && npm run test:page-builder && npm run test:cloudflare",
+    "cloudflare:dev": "npm run build && astro preview --host 127.0.0.1 --port 8788",
+    "deploy": "npm run build && wrangler deploy",
+    "cloudflare:types": "wrangler types",
+    "db:migrate:local": "wrangler d1 migrations apply DB --local",
+    "db:migrate:remote": "wrangler d1 migrations apply DB --remote"
+  },
+  "dependencies": {
+    "@astrojs/cloudflare": "14.1.7",
+    "@fontsource-variable/alexandria": "5.2.8",
+    "astro": "7.1.6"
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.9.10",
+    "@sparticuz/chromium": "^149.0.0",
+    "happy-dom": "^20.10.6",
+    "puppeteer-core": "^25.3.0",
+    "typescript": "5.9.3",
+    "wrangler": "4.115.0"
+  },
+  "allowScripts": {
+    "esbuild@0.28.1": true,
+    "workerd@1.20260722.1": true
+  }
+}

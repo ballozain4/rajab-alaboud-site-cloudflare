@@ -1,0 +1,13 @@
+---
+interface Props {
+  primaryLabel?: string;
+  primaryUrl?: string;
+  secondaryLabel?: string;
+  secondaryUrl?: string;
+}
+const { primaryLabel = '', primaryUrl = '', secondaryLabel = '', secondaryUrl = '' } = Astro.props;
+---
+{(primaryLabel || secondaryLabel) && <div class="builder-actions">
+  {primaryLabel && primaryUrl && <a class="button button-primary" href={primaryUrl} data-analytics-event={primaryUrl.includes('consultation') ? 'consultation_cta' : undefined}>{primaryLabel}</a>}
+  {secondaryLabel && secondaryUrl && <a class="button button-outline" href={secondaryUrl}>{secondaryLabel}</a>}
+</div>}

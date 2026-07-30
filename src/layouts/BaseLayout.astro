@@ -1,0 +1,114 @@
+---
+import '@fontsource-variable/alexandria/index.css';
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import MobileActionBar from '../components/MobileActionBar.astro';
+import BackToTop from '../components/BackToTop.astro';
+import { getPublicContent } from '../lib/server-content';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  noindex?: boolean;
+  headerMode?: 'full' | 'minimal' | 'hidden';
+  footerMode?: 'full' | 'minimal' | 'hidden';
+}
+
+const {
+  title,
+  description,
+  image = '/images/placeholders/portrait.svg',
+  noindex = false,
+  headerMode = 'full',
+  footerMode = 'full'
+} = Astro.props;
+const content = await getPublicContent();
+const { site, home, pages, theme } = content;
+const analyticsToken = import.meta.env.PUBLIC_CF_ANALYTICS_TOKEN || '';
+const finalTitle = title || site.name;
+const finalDescription = description || `${site.name} — ${site.title}. استشارة أولية مجانية تساعد على تحديد الخدمة أو خيارات العناية المناسبة.`;
+const pageTitle =
+  finalTitle === site.name
+    ? `${site.name} | ${site.title}`
+    : finalTitle.includes(site.name)
+      ? finalTitle
+      : `${finalTitle} | ${site.name}`;
+const canonical = new URL(Astro.url.pathname, Astro.site || Astro.url.origin);
+const absoluteImage = new URL(image, Astro.site || Astro.url.origin);
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: site.name,
+  jobTitle: site.title,
+  email: site.email,
+  telephone: site.phoneLink,
+  url: canonical.origin,
+  sameAs: [site.facebook, site.instagram].filter(Boolean)
+};
+const themeStyle = [
+  `--primary:${theme.primary}`,
+  `--primary-strong:${theme.primaryStrong}`,
+  `--primary-soft:${theme.primarySoft}`,
+  `--secondary:${theme.secondary}`,
+  `--secondary-soft:${theme.secondarySoft}`,
+  `--accent:${theme.accent}`,
+  `--background:${theme.background}`,
+  `--surface:${theme.surface}`,
+  `--surface-alt:${theme.surfaceAlt}`,
+  `--text:${theme.text}`,
+  `--muted:${theme.muted}`,
+  `--border:${theme.border}`,
+  `--success:${theme.success}`,
+  `--warning:${theme.warning}`,
+  `--error:${theme.error}`,
+  `--info:${theme.info}`,
+  `--button-text:${theme.buttonText}`,
+  `--focus:${theme.focus}`
+].join(';');
+Astro.response.headers.set('Cache-Control', noindex ? 'no-store' : 'public, max-age=0, s-maxage=300, stale-while-revalidate=86400');
+---
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content={theme.primary} />
+    <meta name="description" content={finalDescription} />
+    {noindex && <meta name="robots" content="noindex,nofollow" />}
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="ar_SY" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={finalDescription} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={absoluteImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <title>{pageTitle}</title>
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(personSchema)} />
+    {analyticsToken && (
+      <script
+        is:inline
+        defer
+        src="https://static.cloudflareinsights.com/beacon.min.js"
+        data-cf-beacon={JSON.stringify({ token: analyticsToken })}
+      ></script>
+    )}
+    <slot name="head" />
+  </head>
+  <body style={themeStyle}>
+    <a class="skip-link" href="#main-content">تجاوز إلى المحتوى</a>
+    {headerMode !== 'hidden' && <Header site={site} pages={pages} minimal={headerMode === 'minimal'} />}
+    <main id="main-content"><slot /></main>
+    {footerMode !== 'hidden' && <Footer site={site} biography={home.footer.biography} minimal={footerMode === 'minimal'} />}
+    <MobileActionBar site={site} />
+    <BackToTop />
+    <div class="toast" data-toast role="status" aria-live="polite"></div>
+    <script>
+      import '../scripts/dialogs';
+      import '../scripts/landing';
+    </script>
+  </body>
+</html>

@@ -1,0 +1,21 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageSectionRenderer from '../components/PageSectionRenderer.astro';
+import { getPublicContent } from '../lib/server-content';
+
+const content = await getPublicContent();
+const page = content.pages.find((item) => item.isHomepage) || content.pages.find((item) => item.slug === 'home');
+if (!page) throw new Error('لم يتم تحديد الصفحة الرئيسية في محتوى منشئ الصفحات.');
+---
+<BaseLayout
+  title={page.seo.title || content.site.name}
+  description={page.seo.description}
+  image={page.seo.image || undefined}
+  noindex={page.seo.noindex}
+  headerMode={page.headerMode}
+  footerMode={page.footerMode}
+>
+  <div id="top" class:list={['managed-page', `managed-page-${page.pageKind}`]}>
+    {page.sections.filter((section) => section.visible).map((section) => <PageSectionRenderer section={section} content={content} />)}
+  </div>
+</BaseLayout>

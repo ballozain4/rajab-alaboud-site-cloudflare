@@ -1,0 +1,79 @@
+---
+import Icon from './Icon.astro';
+import type { ManagedPage, SiteSettings } from '../types';
+
+interface Props { site: SiteSettings; pages?: ManagedPage[]; minimal?: boolean; }
+const { site, pages = [], minimal = false } = Astro.props;
+const managedLinks = pages
+  .filter((page) => page.status === 'published' && page.showInNavigation)
+  .map((page) => ({ href: page.isHomepage ? '/#top' : `/${page.slug}/`, label: page.navigationLabel, primary: false }));
+const fallbackLinks = [
+  { href: '/#top', label: 'الرئيسية' },
+  { href: '/#consultation', label: 'طلب استشارة', primary: true },
+  { href: '/#services', label: 'الخدمات' },
+  { href: '/#cases', label: 'معرض الأعمال' }
+];
+const hasConfiguredNavigation = Array.isArray(site.navigation);
+const configuredLinks = hasConfiguredNavigation
+  ? site.navigation
+      .filter((item) => item.visible !== false)
+      .map((item) => ({ href: item.url, label: item.label, primary: item.primary === true }))
+  : [];
+const links = hasConfiguredNavigation ? configuredLinks : managedLinks.length > 1 ? managedLinks : fallbackLinks;
+const minimalLink = links.find((link) => link.primary) || { href: '/#consultation', label: 'طلب استشارة', primary: true };
+---
+<header class="site-header" data-site-header>
+  <div class="container header-inner">
+    <a class="brand" href="/#top" aria-label={`${site.name} — الصفحة الرئيسية`}>
+      <span class="brand-mark"><Icon name="leaf" size={22} /></span>
+      <span>{site.name}<small>{site.title}</small></span>
+    </a>
+
+    <nav class:list={['main-nav', { 'main-nav-minimal': minimal }]} id="main-nav" aria-label="التنقل الرئيسي">
+      {!minimal && links.map((link) => <a class:list={{ 'nav-primary': link.primary }} href={link.href}>{link.label}</a>)}
+      {minimal && <a class="nav-primary" href={minimalLink.href}>{minimalLink.label}</a>}
+    </nav>
+
+    {(minimal || links.length > 0) && (
+      <>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="فتح القائمة">
+          <span data-menu-icon><Icon name="menu" size={24} /></span>
+        </button>
+        <button class="menu-backdrop" type="button" aria-label="إغلاق القائمة" aria-hidden="true" tabindex="-1"></button>
+      </>
+    )}
+  </div>
+</header>
+
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>('.menu-toggle');
+  const nav = document.querySelector<HTMLElement>('#main-nav');
+  const backdrop = document.querySelector<HTMLButtonElement>('.menu-backdrop');
+  const closeMenu = (restoreFocus = false) => {
+    toggle?.setAttribute('aria-expanded', 'false');
+    toggle?.setAttribute('aria-label', 'فتح القائمة');
+    nav?.classList.remove('open');
+    backdrop?.classList.remove('open');
+    backdrop?.setAttribute('aria-hidden', 'true');
+    backdrop?.setAttribute('tabindex', '-1');
+    document.body.classList.remove('menu-open');
+    if (restoreFocus) toggle?.focus();
+  };
+  toggle?.addEventListener('click', () => {
+    const open = toggle.getAttribute('aria-expanded') !== 'true';
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? 'إغلاق القائمة' : 'فتح القائمة');
+    nav?.classList.toggle('open', open);
+    backdrop?.classList.toggle('open', open);
+    backdrop?.setAttribute('aria-hidden', String(!open));
+    backdrop?.setAttribute('tabindex', open ? '0' : '-1');
+    document.body.classList.toggle('menu-open', open);
+    if (open) requestAnimationFrame(() => nav?.querySelector<HTMLAnchorElement>('a')?.focus());
+  });
+  nav?.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => closeMenu(false)));
+  backdrop?.addEventListener('click', () => closeMenu(true));
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && toggle?.getAttribute('aria-expanded') === 'true') closeMenu(true);
+  });
+  window.addEventListener('resize', () => { if (window.innerWidth > 820) closeMenu(); });
+</script>

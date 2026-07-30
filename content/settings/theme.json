@@ -1,0 +1,21 @@
+{
+  "preset": "lavender",
+  "primary": "#5a2f73",
+  "primaryStrong": "#321743",
+  "primarySoft": "#7b4b92",
+  "secondary": "#c8add8",
+  "secondarySoft": "#eee5f3",
+  "accent": "#b36fd0",
+  "background": "#fcfafd",
+  "surface": "#ffffff",
+  "surfaceAlt": "#f5f0f8",
+  "text": "#241b2b",
+  "muted": "#665e6d",
+  "border": "#e2d7e8",
+  "success": "#276749",
+  "warning": "#825111",
+  "error": "#a61b1b",
+  "info": "#245e8a",
+  "buttonText": "#ffffff",
+  "focus": "#b36fd0"
+}

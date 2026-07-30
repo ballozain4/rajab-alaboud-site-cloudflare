@@ -1,0 +1,18 @@
+---
+import type { DisplayFieldDefinition } from '../types';
+
+interface Props {
+  fields?: DisplayFieldDefinition[];
+  values?: Record<string, string>;
+  placement?: 'card' | 'details';
+  className?: string;
+}
+
+const { fields = [], values = {}, placement, className = '' } = Astro.props;
+const visible = [...fields]
+  .filter((field) => !field.builtin && field.visible && (!placement || field.placement === placement) && values[field.id])
+  .sort((a, b) => a.order - b.order);
+---
+{visible.length > 0 && <dl class:list={['content-custom-fields', className]}>
+  {visible.map((field) => <div><dt>{field.label}</dt><dd>{values[field.id]}</dd></div>)}
+</dl>}

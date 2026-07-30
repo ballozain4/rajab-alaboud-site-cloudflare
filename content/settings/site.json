@@ -1,0 +1,41 @@
+{
+  "name": "رجب العبود",
+  "title": "اختصاصي في التجميل والعناية بالبشرة",
+  "phoneDisplay": "0980 623 852",
+  "phoneLink": "+963980623852",
+  "whatsapp": "963980623852",
+  "email": "rajabalaboud@gmail.com",
+  "facebook": "https://www.facebook.com/share/1BsPgTx1cu/",
+  "instagram": "https://www.instagram.com/spec.rajabalaboud?igsh=dW9hZnIwbHAxZ2g=",
+  "portrait": "/images/uploads/1785015933577-rajab-alaboud-portrait.png",
+  "navigation": [
+    {
+      "id": "home",
+      "label": "الرئيسية",
+      "url": "/#top",
+      "visible": true,
+      "primary": false
+    },
+    {
+      "id": "consultation",
+      "label": "طلب استشارة",
+      "url": "/#consultation",
+      "visible": true,
+      "primary": true
+    },
+    {
+      "id": "services",
+      "label": "الخدمات",
+      "url": "/#services",
+      "visible": true,
+      "primary": false
+    },
+    {
+      "id": "cases",
+      "label": "معرض الأعمال",
+      "url": "/#cases",
+      "visible": true,
+      "primary": false
+    }
+  ]
+}

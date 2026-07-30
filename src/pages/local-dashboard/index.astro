@@ -1,0 +1,209 @@
+---
+import '@fontsource-variable/alexandria/index.css';
+import '../../styles/local-dashboard.css';
+
+if (!import.meta.env.DEV) return Astro.redirect('/404/', 302);
+---
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow" />
+    <meta name="theme-color" content="#5a2f73" />
+    <title>لوحة التحكم المحلية | رجب العبود</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#dashboard-content">تجاوز إلى المحتوى</a>
+    <header class="dashboard-header">
+      <div>
+        <p class="dashboard-kicker">تعمل محلياً فقط</p>
+        <h1>لوحة تحكم موقع رجب العبود</h1>
+        <p>عدّل المحتوى بصرياً، احفظه داخل المشروع، ثم راجع التغييرات عبر Git قبل نشرها تلقائياً على Cloudflare Workers.</p>
+      </div>
+      <a class="dashboard-button secondary" href="/" target="_blank">فتح الموقع ↗</a>
+    </header>
+
+    <div class="dashboard-toolbar" aria-label="أدوات المحتوى">
+      <button class="dashboard-button" type="button" data-save-draft>حفظ مسودة محلية</button>
+      <button class="dashboard-button primary" type="button" data-save-files>حفظ في ملفات المشروع</button>
+      <button class="dashboard-button primary-soft" type="button" data-save-preview>حفظ وفتح الموقع</button>
+      <button class="dashboard-button secondary" type="button" data-reload>إعادة تحميل الملفات</button>
+      <button class="dashboard-button secondary" type="button" data-export>تصدير JSON</button>
+      <label class="dashboard-button secondary file-label">استيراد JSON<input type="file" accept="application/json,.json" data-import /></label>
+      <span class="unsaved-indicator" data-unsaved hidden>تغييرات غير محفوظة</span>
+    </div>
+
+    <div class="dashboard-message" data-dashboard-message role="status" aria-live="polite">جارٍ تحميل المحتوى…</div>
+    <div class="draft-banner" data-draft-banner hidden>
+      <span>توجد مسودة محلية محفوظة على هذا الجهاز.</span>
+      <div><button type="button" data-restore-draft>استعادة المسودة</button><button type="button" data-clear-draft>حذفها</button></div>
+    </div>
+
+    <div class="dashboard-layout">
+      <aside class="dashboard-sidebar" aria-label="أقسام لوحة التحكم">
+        <nav>
+          <a href="#panel-pages">منشئ الصفحات</a>
+          <a href="#panel-theme">ألوان وهوية الموقع</a>
+          <a href="#panel-navigation">الهيدر وقائمة التنقل</a>
+          <a href="#panel-profile">بيانات رجب</a>
+          <a href="#panel-services">الخدمات</a>
+          <a href="#panel-consultation-fields">نموذج طلب الاستشارة</a>
+          <a href="#panel-cases">معرض الأعمال</a>
+          <a href="#panel-achievements">الإنجازات والشهادات</a>
+          <a href="#panel-contact">التواصل والتذييل</a>
+          <a href="#panel-privacy">سياسة الخصوصية</a>
+          <a href="#panel-disclaimer">إخلاء المسؤولية</a>
+        </nav>
+      </aside>
+
+      <main id="dashboard-content" class="dashboard-content">
+        <section class="dashboard-panel builder-dashboard-panel" id="panel-pages">
+          <div class="panel-heading collection-heading">
+            <div><span>01</span><h2>منشئ الصفحات وصفحات الهبوط</h2></div>
+            <div class="panel-tools">
+              <button class="dashboard-button secondary" type="button" data-page-undo disabled>تراجع</button>
+              <button class="dashboard-button secondary" type="button" data-page-redo disabled>إعادة</button>
+              <button class="dashboard-button primary-soft" type="button" data-add-page>إنشاء صفحة</button>
+            </div>
+          </div>
+          <p class="panel-notice">اختر قالباً، أضف الأقسام ورتّبها، ثم عاين المسودة. لن تتغير ملفات المشروع قبل الضغط على «حفظ في ملفات المشروع».</p>
+          <div class="page-builder-shell">
+            <aside class="page-list-panel">
+              <label class="search-field"><span>بحث في الصفحات</span><input type="search" placeholder="اسم الصفحة أو الرابط…" data-filter-pages /></label>
+              <div class="page-list" data-page-list></div>
+              <div class="page-template-actions">
+                <strong>إنشاء سريع من قالب</strong>
+                <button type="button" data-create-template="blank">صفحة فارغة</button>
+                <button type="button" data-create-template="service">صفحة خدمة</button>
+                <button type="button" data-create-template="consultation">صفحة استشارة</button>
+                <button type="button" data-create-template="campaign">صفحة حملة</button>
+              </div>
+            </aside>
+            <div class="page-workspace">
+              <div data-page-editor></div>
+              <section class="draft-page-preview" aria-labelledby="draft-preview-title">
+                <div class="draft-preview-toolbar">
+                  <div><strong id="draft-preview-title">معاينة المسودة الفورية</strong><span>تقريبية وآمنة داخل اللوحة</span></div>
+                  <div><button type="button" data-preview-size="desktop" aria-pressed="true">كمبيوتر</button><button type="button" data-preview-size="mobile" aria-pressed="false">هاتف</button></div>
+                </div>
+                <div class="draft-preview-stage"><div class="draft-preview-document" data-page-preview></div></div>
+              </section>
+            </div>
+          </div>
+        </section>
+
+        <section class="dashboard-panel" id="panel-theme">
+          <div class="panel-heading"><div><span>02</span><h2>ألوان وهوية الموقع</h2></div><p>تحكم مركزي بمعظم ألوان الموقع، مع معاينة التباين وقيم آمنة قابلة للاستعادة.</p></div>
+          <div data-panel="theme"></div>
+        </section>
+
+        <section class="dashboard-panel" id="panel-navigation">
+          <div class="panel-heading collection-heading">
+            <div><span>03</span><h2>الهيدر وقائمة التنقل</h2></div>
+            <button class="dashboard-button primary-soft" type="button" data-add-navigation>إضافة رابط</button>
+          </div>
+          <p class="panel-notice">تحكم بالعناوين وترتيبها وظهورها في الهيدر. يمكن ربط العنصر بقسم مثل <code>/#services</code> أو بصفحة مثل <code>/achievements/</code>.</p>
+          <div class="navigation-editor" data-panel="navigation"></div>
+        </section>
+
+        <section class="dashboard-panel" id="panel-profile">
+          <div class="panel-heading"><div><span>04</span><h2>بيانات رجب العبود</h2></div><p>لا تضف مؤهلاً أو معلومة مهنية قبل توثيقها.</p></div>
+          <div class="dashboard-form-grid" data-panel="profile"></div>
+        </section>
+
+        <section class="dashboard-panel" id="panel-services">
+          <div class="panel-heading collection-heading">
+            <div><span>05</span><h2>الخدمات</h2></div>
+            <div class="panel-tools">
+              <label class="search-field"><span class="sr-only">البحث في الخدمات</span><input type="search" placeholder="ابحث في الخدمات…" data-filter-services /></label>
+              <button class="dashboard-button primary-soft" type="button" data-add-service>إضافة خدمة</button>
+            </div>
+          </div>
+          <p class="panel-notice">رتّب الخدمات بالسحب من المقبض ⋮⋮، أو استخدم السهمين كبديل مناسب للوحة المفاتيح والهاتف. يُحفظ الترتيب نفسه في الموقع بعد حفظ الملفات.</p>
+          <p class="collection-count" data-services-count></p>
+          <div class="collection-list" data-panel="services"></div>
+        </section>
+
+        <section class="dashboard-panel" id="panel-consultation-fields">
+          <div class="panel-heading collection-heading">
+            <div><span>07</span><h2>نموذج طلب الاستشارة</h2></div>
+            <button class="dashboard-button primary-soft" type="button" data-add-consultation-field>إضافة حقل جديد</button>
+          </div>
+          <p class="panel-notice">يمكن تعديل أسماء الحقول ونوعها وترتيبها وظهورها وإلزاميتها. يبقى رقم الهاتف والموافقة على الخصوصية ظاهرين وإلزاميين لأن الطلب لا يمكن متابعته بأمان من دونهما.</p>
+          <div class="field-model-list" data-panel="consultation-fields"></div>
+        </section>
+
+        <section class="dashboard-panel" id="panel-cases">
+          <div class="panel-heading collection-heading">
+            <div><span>06</span><h2>معرض الأعمال</h2></div>
+            <div class="panel-tools">
+              <label class="search-field"><span class="sr-only">البحث في الحالات</span><input type="search" placeholder="ابحث في الحالات…" data-filter-cases /></label>
+              <button class="dashboard-button primary-soft" type="button" data-add-case>إضافة حالة</button>
+            </div>
+          </div>
+          <p class="panel-notice">رتّب الحالات بالسحب من المقبض ⋮⋮، أو استخدم السهمين. لا تنشر صوراً حقيقية إلا بعد موافقة صريحة وإخفاء أي معلومات تعريفية.</p>
+          <p class="collection-count" data-cases-count></p>
+          <div class="collection-list" data-panel="cases"></div>
+        </section>
+
+        <section class="dashboard-panel" id="panel-achievements">
+          <div class="panel-heading collection-heading">
+            <div><span>07</span><h2>الإنجازات والشهادات</h2></div>
+            <div class="panel-tools">
+              <label class="search-field"><span class="sr-only">البحث في الإنجازات</span><input type="search" placeholder="ابحث في الإنجازات…" data-filter-achievements /></label>
+              <button class="dashboard-button primary-soft" type="button" data-add-achievement>إضافة إنجاز</button>
+            </div>
+          </div>
+          <p class="panel-notice">استخدم وسم «بيانات تجريبية» حتى توثيق اسم الشهادة أو الإنجاز وصورته وتاريخه.</p>
+          <p class="collection-count" data-achievements-count></p>
+          <div class="collection-list" data-panel="achievements"></div>
+        </section>
+
+        <section class="dashboard-panel" id="panel-contact">
+          <div class="panel-heading"><div><span>08</span><h2>التواصل والتذييل</h2></div><p>تظهر هذه البيانات للزوار، لذا راجع الروابط قبل الحفظ.</p></div>
+          <div class="dashboard-form-grid" data-panel="contact"></div>
+        </section>
+
+        <section class="dashboard-panel" id="panel-privacy">
+          <div class="panel-heading"><div><span>09</span><h2>سياسة الخصوصية</h2></div><p>يمكن تعديل النصوص التشغيلية فقط؛ يلزم اعتماد قانوني مستقل قبل الإطلاق.</p></div>
+          <div class="privacy-editor" data-panel="privacy"></div>
+        </section>
+
+        <section class="dashboard-panel" id="panel-disclaimer">
+          <div class="panel-heading"><div><span>10</span><h2>سياسة إخلاء المسؤولية</h2></div><p>حافظ على الصفة المهنية الدقيقة وعدم تقديم تشخيص أو وعود بنتائج.</p></div>
+          <div class="privacy-editor" data-panel="disclaimer"></div>
+        </section>
+      </main>
+    </div>
+
+    <dialog class="field-editor-dialog" data-field-editor-dialog aria-labelledby="field-editor-title">
+      <form method="dialog" class="field-editor-shell" data-field-editor-form>
+        <header>
+          <div><span>تخصيص فوري</span><h2 id="field-editor-title">تعديل عنوان الحقل</h2></div>
+          <button type="button" data-close-field-editor aria-label="إغلاق">×</button>
+        </header>
+        <div class="dashboard-form-grid">
+          <label class="dashboard-field full"><span>عنوان الحقل</span><input type="text" data-field-editor-label required maxlength="120" /></label>
+          <label class="dashboard-field"><span>نوع الإدخال</span><select data-field-editor-type><option value="text">سطر قصير</option><option value="textarea">نص متعدد الأسطر</option></select></label>
+          <label class="dashboard-field"><span>موضع الظهور</span><select data-field-editor-placement><option value="card">داخل البطاقة أو القسم</option><option value="details">داخل التفاصيل</option></select></label>
+          <div class="check-row full">
+            <label><input type="checkbox" data-field-editor-visible /> يظهر للزائر</label>
+            <label><input type="checkbox" data-field-editor-required /> حقل إلزامي</label>
+          </div>
+        </div>
+        <footer>
+          <button class="dashboard-button danger-soft" type="button" data-delete-display-field hidden>حذف الحقل</button>
+          <span></span>
+          <button class="dashboard-button secondary" type="button" data-close-field-editor>إلغاء</button>
+          <button class="dashboard-button primary" type="submit">حفظ التعديل</button>
+        </footer>
+      </form>
+    </dialog>
+
+    <input type="file" accept="image/jpeg,image/png,image/webp,image/avif" data-image-input hidden />
+    <script>
+      import '../../scripts/local-dashboard';
+    </script>
+  </body>
+</html>

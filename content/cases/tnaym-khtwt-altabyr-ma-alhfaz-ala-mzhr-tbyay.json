@@ -1,0 +1,95 @@
+{
+  "slug": "tnaym-khtwt-altabyr-ma-alhfaz-ala-mzhr-tbyay",
+  "title": "تنعيم خطوط التعبير مع الحفاظ على مظهر طبيعي",
+  "category": "بوتوكس",
+  "procedure": "بوتوكس",
+  "description": "استخدام دقيق للبوتولينوم توكسين لتخفيف خطوط التعبير في المناطق المستهدفة من الوجه، مع مراعاة حركة العضلات وتوازن الملامح للحصول على مظهر أكثر هدوءاً وانتعاشاً دون تغيير التعابير الطبيعية.",
+  "performed": "",
+  "procedureDate": "",
+  "sessions": "",
+  "duration": "",
+  "displayType": "before-after",
+  "beforeImage": "/images/uploads/1785276689441-file-00000000b54871f49840b252bcb8eee3.png",
+  "afterImage": "/images/uploads/1785276689506-file-00000000a2347243b6d302c457769e65.png",
+  "resultImage": "",
+  "additionalImages": [],
+  "notes": "",
+  "fields": [
+    {
+      "id": "procedure",
+      "label": "الخدمة أو الإجراء",
+      "type": "text",
+      "placement": "card",
+      "required": true,
+      "visible": true,
+      "builtin": true,
+      "order": 10
+    },
+    {
+      "id": "description",
+      "label": "الوصف",
+      "type": "textarea",
+      "placement": "details",
+      "required": true,
+      "visible": true,
+      "builtin": true,
+      "order": 20
+    },
+    {
+      "id": "performed",
+      "label": "ما تم تنفيذه",
+      "type": "textarea",
+      "placement": "details",
+      "required": false,
+      "visible": false,
+      "builtin": true,
+      "order": 30
+    },
+    {
+      "id": "procedureDate",
+      "label": "تاريخ الإجراء",
+      "type": "text",
+      "placement": "details",
+      "required": false,
+      "visible": true,
+      "builtin": true,
+      "order": 40
+    },
+    {
+      "id": "sessions",
+      "label": "عدد الجلسات",
+      "type": "text",
+      "placement": "details",
+      "required": false,
+      "visible": true,
+      "builtin": true,
+      "order": 50
+    },
+    {
+      "id": "duration",
+      "label": "المدة",
+      "type": "text",
+      "placement": "details",
+      "required": false,
+      "visible": true,
+      "builtin": true,
+      "order": 60
+    },
+    {
+      "id": "notes",
+      "label": "ملاحظات",
+      "type": "textarea",
+      "placement": "details",
+      "required": false,
+      "visible": false,
+      "builtin": true,
+      "order": 70
+    }
+  ],
+  "customFields": {},
+  "status": "published",
+  "featured": false,
+  "placeholder": false,
+  "order": 80,
+  "visible": true
+}

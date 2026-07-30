@@ -1,0 +1,35 @@
+---
+import Icon from './Icon.astro';
+---
+<button
+  class="back-to-top"
+  type="button"
+  aria-label="العودة إلى أعلى الصفحة"
+  data-back-to-top
+  hidden
+>
+  <Icon name="arrow" size={23} />
+</button>
+
+<script>
+  const button = document.querySelector<HTMLButtonElement>('[data-back-to-top]');
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  const updateButton = () => {
+    if (!button) return;
+    const visible = window.scrollY > Math.max(320, window.innerHeight * 0.45);
+    button.hidden = !visible;
+    button.disabled = !visible;
+    button.setAttribute('aria-hidden', String(!visible));
+  };
+
+  button?.addEventListener('click', () => {
+    const top = document.getElementById('top') || document.getElementById('main-content');
+    if (top) top.scrollIntoView({ behavior: reducedMotion.matches ? 'auto' : 'smooth', block: 'start' });
+    else window.scrollTo({ top: 0, behavior: reducedMotion.matches ? 'auto' : 'smooth' });
+  });
+
+  window.addEventListener('scroll', updateButton, { passive: true });
+  window.addEventListener('resize', updateButton);
+  updateButton();
+</script>

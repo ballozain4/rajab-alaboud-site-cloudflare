@@ -1,0 +1,139 @@
+---
+import '@fontsource-variable/alexandria/index.css';
+import '../../styles/admin.css';
+import {
+  CONSULTATION_SOURCES,
+  CONSULTATION_STATUSES,
+  STATUS_LABELS,
+  SYRIAN_PROVINCES
+} from '../../lib/consultation-options';
+import { getPublicContent } from '../../lib/server-content';
+
+export const prerender = false;
+Astro.response.headers.set('Cache-Control', 'no-store');
+Astro.response.headers.set('X-Robots-Tag', 'noindex, nofollow');
+const content = await getPublicContent();
+const consultationFieldLabels = Object.fromEntries(
+  content.fieldModel.consultationFields.map((field) => [field.id, field.label])
+);
+---
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow,noarchive" />
+    <meta name="theme-color" content="#5a2f73" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>إدارة طلبات الاستشارة | رجب العبود</title>
+  </head>
+  <body>
+    <a class="admin-skip" href="#admin-main">تجاوز إلى المحتوى</a>
+
+    <main class="admin-login-shell" data-login-view>
+      <section class="admin-login-card" aria-labelledby="login-title">
+        <div class="admin-brand-mark" aria-hidden="true">ر</div>
+        <p class="admin-kicker">منطقة خاصة</p>
+        <h1 id="login-title">إدارة طلبات الاستشارة</h1>
+        <p>أدخل كلمة المرور الإدارية. لا تُحفظ كلمة المرور داخل ملفات الموقع.</p>
+        <form data-login-form>
+          <label>
+            <span>كلمة المرور</span>
+            <input name="password" type="password" autocomplete="current-password" minlength="16" required autofocus />
+          </label>
+          <button type="submit">تسجيل الدخول</button>
+          <p class="admin-form-message" data-login-message role="status" aria-live="polite"></p>
+        </form>
+        <a href="/">العودة إلى الموقع</a>
+      </section>
+    </main>
+
+    <div class="admin-app" data-admin-view hidden>
+      <header class="admin-header">
+        <div class="admin-header-inner">
+          <div>
+            <p class="admin-kicker">رجب العبود</p>
+            <h1>طلبات الاستشارة</h1>
+          </div>
+          <div class="admin-header-actions">
+            <button type="button" class="admin-button secondary" data-refresh>تحديث</button>
+            <button type="button" class="admin-button secondary" data-export>تصدير CSV</button>
+            <a class="admin-button secondary" href="/" target="_blank" rel="noopener">فتح الموقع</a>
+            <button type="button" class="admin-button danger" data-logout>خروج</button>
+          </div>
+        </div>
+      </header>
+
+      <main id="admin-main" class="admin-main">
+        <p class="admin-global-message" data-global-message role="status" aria-live="polite"></p>
+
+        <section class="admin-stat-grid" aria-label="ملخص الطلبات">
+          <article><span>إجمالي الطلبات</span><strong data-stat="total">—</strong></article>
+          <article class="new"><span>طلبات جديدة</span><strong data-stat="new">—</strong></article>
+          <article><span>مواعيد محجوزة</span><strong data-stat="booked">—</strong></article>
+          <article><span>طلبات مكتملة</span><strong data-stat="completed">—</strong></article>
+          <article><span>في الأرشيف</span><strong data-stat="archived">—</strong></article>
+        </section>
+
+        <section class="admin-panel filter-panel" aria-labelledby="filter-title">
+          <div class="panel-title-row">
+            <div><p class="admin-kicker">بحث وفرز</p><h2 id="filter-title">تصفية الطلبات</h2></div>
+            <button type="button" class="admin-text-button" data-reset-filters>مسح الفلاتر</button>
+          </div>
+          <form class="admin-filters" data-filter-form>
+            <label class="wide"><span>بحث</span><input type="search" name="q" placeholder="الاسم، الهاتف، رقم الطلب أو الموضوع" /></label>
+            <label><span>الحالة</span><select name="status"><option value="">كل الحالات</option>{CONSULTATION_STATUSES.map((status) => <option value={status}>{STATUS_LABELS[status]}</option>)}</select></label>
+            <label><span>المحافظة</span><select name="city"><option value="">كل المحافظات</option>{SYRIAN_PROVINCES.map((city) => <option>{city}</option>)}</select></label>
+            <label><span>المصدر</span><select name="source"><option value="">كل المصادر</option>{CONSULTATION_SOURCES.map((source) => <option>{source}</option>)}</select></label>
+            <label><span>من تاريخ</span><input type="date" name="from" /></label>
+            <label><span>إلى تاريخ</span><input type="date" name="to" /></label>
+            <label class="archive-filter"><input type="checkbox" name="archived" value="1" /><span>عرض الأرشيف بدلاً من الطلبات النشطة</span></label>
+            <button class="admin-button primary" type="submit">تطبيق الفلاتر</button>
+          </form>
+        </section>
+
+        <div class="admin-content-grid">
+          <section class="admin-panel requests-panel" aria-labelledby="requests-title">
+            <div class="panel-title-row">
+              <div><p class="admin-kicker">قائمة المتابعة</p><h2 id="requests-title">الطلبات</h2></div>
+              <span class="requests-count" data-results-count>جارٍ التحميل…</span>
+            </div>
+            <div class="requests-table-wrap" data-requests-list></div>
+            <div class="admin-pagination" data-pagination></div>
+          </section>
+
+          <aside class="admin-panel insights-panel" aria-labelledby="insights-title">
+            <div><p class="admin-kicker">توزيع سريع</p><h2 id="insights-title">ملخص المتابعة</h2></div>
+            <h3>حسب الحالة</h3>
+            <div class="insight-list" data-insight-statuses></div>
+            <h3>أكثر المحافظات</h3>
+            <div class="insight-list" data-insight-cities></div>
+            <h3>حسب المصدر</h3>
+            <div class="insight-list" data-insight-sources></div>
+          </aside>
+        </div>
+      </main>
+    </div>
+
+    <dialog class="request-dialog" data-request-dialog aria-labelledby="request-dialog-title">
+      <div class="request-dialog-shell">
+        <header>
+          <div><p class="admin-kicker">تفاصيل الطلب</p><h2 id="request-dialog-title" data-detail-title>—</h2></div>
+          <button type="button" class="dialog-close" data-close-dialog aria-label="إغلاق">×</button>
+        </header>
+        <div class="request-dialog-body" data-detail-content></div>
+      </div>
+    </dialog>
+
+    <script is:inline define:vars={{
+      statusLabels: STATUS_LABELS,
+      statusValues: CONSULTATION_STATUSES,
+      consultationFieldLabels
+    }}>
+      window.__RAJAB_ADMIN_OPTIONS__ = { statusLabels, statusValues, consultationFieldLabels };
+    </script>
+    <script>
+      import '../../scripts/admin';
+    </script>
+  </body>
+</html>

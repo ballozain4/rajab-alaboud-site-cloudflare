@@ -1,0 +1,161 @@
+---
+import type { ConsultationFieldDefinition, HomeSettings, Service } from '../types';
+
+interface Props {
+  settings: HomeSettings['consultation'];
+  fields: ConsultationFieldDefinition[];
+  services: Service[];
+}
+
+const { settings, fields, services } = Astro.props;
+const visibleServices = services.filter((service) => service.visible !== false);
+const visibleFields = [...fields].filter((field) => field.visible).sort((a, b) => a.order - b.order);
+const hasVisibleConsultationType = visibleFields.some((field) => field.id === 'consultationType');
+const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '';
+const turnstileReady = Boolean(turnstileSiteKey);
+const localDemo = import.meta.env.DEV && !turnstileReady;
+---
+<div class="consultation-layout">
+  <div class="consultation-copy">
+    <p class="eyebrow">{settings.eyebrow}</p>
+    <h2 id="consultation-title">{settings.title}</h2>
+    <p class="lead">{settings.description}</p>
+    <div class="consultation-safety" role="note">
+      <strong>قبل الإرسال</strong>
+      <p>الاستشارة الأولية لا تمثل تشخيصاً طبياً. لا تُدخل معلومات صحية حساسة أو تفاصيل لا تلزم لفهم طلبك.</p>
+    </div>
+  </div>
+
+  <form class="card consultation-form" id="consultation-form" novalidate data-consultation-form>
+    <input type="hidden" name="requestMode" value="consultation" data-request-mode />
+    <div class="service-mode-notice" data-service-mode-notice hidden>
+      <span>أنت تطلب خدمة محددة. يمكنك تغييرها من القائمة أدناه.</span>
+      <button class="text-button" type="button" data-reset-consultation>العودة إلى استشارة عامة</button>
+    </div>
+
+    <div class="form-grid">
+      {visibleFields.map((field) => {
+        const inputId = `consultation-${field.id.replace(/[A-Z]/g, (letter) => `-${letter.toLowerCase()}`)}`;
+        const describedBy = `${field.helpText ? `hint-${field.id} ` : ''}error-${field.id}`;
+        const isPrivacy = field.id === 'privacy';
+        return (
+          <>
+          <div
+            class:list={['field', { 'field-full': field.fullWidth, 'checkbox-wrap': field.type === 'checkbox' }]}
+            data-consultation-type-field={field.id === 'consultationType' ? '' : undefined}
+          >
+            {field.type === 'checkbox' ? (
+              <label class="checkbox-field">
+                <input
+                  id={inputId}
+                  name={field.id}
+                  type="checkbox"
+                  required={field.required}
+                  aria-describedby={`error-${field.id}`}
+                  data-custom-field={field.builtin ? undefined : field.id}
+                />
+                <span>
+                  {isPrivacy && <>اطلعت على <a href="/policies/#privacy" target="_blank">سياسة الخصوصية</a>، و</>}
+                  {field.label}
+                </span>
+              </label>
+            ) : (
+              <>
+                <label
+                  for={inputId}
+                  data-subject-label={field.id === 'subject' ? '' : undefined}
+                >
+                  {field.label} {field.required && <span aria-hidden="true">*</span>}
+                </label>
+                {field.type === 'select' ? (
+                  <select
+                    id={inputId}
+                    name={field.id}
+                    required={field.required}
+                    aria-describedby={describedBy}
+                    data-consultation-type={field.id === 'consultationType' ? '' : undefined}
+                    data-config-required={field.id === 'consultationType' ? String(field.required) : undefined}
+                    data-custom-field={field.builtin ? undefined : field.id}
+                  >
+                    <option value="">{field.placeholder || `اختر ${field.label}`}</option>
+                    {field.options.map((option) => <option value={option}>{option}</option>)}
+                  </select>
+                ) : field.type === 'textarea' ? (
+                  <textarea
+                    id={inputId}
+                    name={field.id}
+                    rows="4"
+                    minlength={field.required ? 3 : undefined}
+                    maxlength="1500"
+                    required={field.required}
+                    placeholder={field.placeholder}
+                    aria-describedby={describedBy}
+                    data-custom-field={field.builtin ? undefined : field.id}
+                  ></textarea>
+                ) : (
+                  <input
+                    id={inputId}
+                    name={field.id}
+                    type={field.type}
+                    inputmode={field.type === 'tel' ? 'tel' : undefined}
+                    autocomplete={field.id === 'name' ? 'name' : field.type === 'tel' ? 'tel' : undefined}
+                    dir={field.type === 'tel' ? 'ltr' : undefined}
+                    minlength={field.id === 'name' && field.required ? 2 : undefined}
+                    maxlength={field.type === 'tel' ? 30 : 220}
+                    pattern={field.type === 'tel' ? '[\\+0-9 \\(\\)\\-]{7,30}' : undefined}
+                    required={field.required}
+                    placeholder={field.placeholder}
+                    aria-describedby={describedBy}
+                    data-custom-field={field.builtin ? undefined : field.id}
+                  />
+                )}
+              </>
+            )}
+            {field.helpText && <p class="field-hint" id={`hint-${field.id}`}>{field.helpText}</p>}
+            <p class="field-error" id={`error-${field.id}`} data-error-for={field.id}></p>
+          </div>
+          {field.id === 'consultationType' && (
+            <div class="field field-full service-request-field" data-service-field hidden>
+              <label for="service-request" data-request-label>طلب الحصول على خدمة <span aria-hidden="true">*</span></label>
+              <select id="service-request" name="serviceSlug" disabled data-service-select aria-describedby="error-serviceSlug">
+                <option value="">اختر الخدمة المطلوبة</option>
+                {visibleServices.map((service) => <option value={service.slug}>{service.name}</option>)}
+              </select>
+              <p class="field-hint">تتحدّث هذه القائمة تلقائياً عند إضافة خدمة أو إخفائها من قسم الخدمات.</p>
+              <p class="field-error" id="error-serviceSlug" data-error-for="serviceSlug"></p>
+            </div>
+          )}
+          </>
+        );
+      })}
+
+      {!hasVisibleConsultationType && (
+        <div class="field field-full service-request-field" data-service-field hidden>
+          <label for="service-request" data-request-label>طلب الحصول على خدمة <span aria-hidden="true">*</span></label>
+          <select id="service-request" name="serviceSlug" disabled data-service-select aria-describedby="error-serviceSlug">
+            <option value="">اختر الخدمة المطلوبة</option>
+            {visibleServices.map((service) => <option value={service.slug}>{service.name}</option>)}
+          </select>
+          <p class="field-hint">تتحدّث هذه القائمة تلقائياً عند إضافة خدمة أو إخفائها من قسم الخدمات.</p>
+          <p class="field-error" id="error-serviceSlug" data-error-for="serviceSlug"></p>
+        </div>
+      )}
+
+      <div class="field field-full turnstile-field">
+        {turnstileReady
+          ? <div class="cf-turnstile" data-sitekey={turnstileSiteKey} data-theme="light" data-language="ar" data-response-field-name="cf-turnstile-response"></div>
+          : localDemo
+            ? <input type="hidden" name="cf-turnstile-response" value="local-demo" />
+            : <div class="notice notice-danger" role="alert">تعذر تفعيل حماية النموذج. يرجى التواصل عبر واتساب مؤقتاً.</div>}
+        <p class="field-error" data-error-for="turnstile"></p>
+      </div>
+    </div>
+
+    <button class="button button-primary submit-button" type="submit" data-submit-button disabled={!turnstileReady && !localDemo}>
+      <span data-submit-label>{settings.submitLabel}</span>
+      <span class="button-spinner" aria-hidden="true"></span>
+    </button>
+    <div class="form-status" data-form-status role="status" aria-live="polite"></div>
+  </form>
+</div>
+{turnstileReady && <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>}

@@ -1,0 +1,57 @@
+---
+import type { DisplayFieldDefinition, HomeSettings, Service } from '../types';
+import Icon from './Icon.astro';
+interface Props { service: Service; requestLabel: HomeSettings['services']['requestLabel']; hidden?: boolean; }
+const { service, requestLabel, hidden = false } = Astro.props;
+const hasImage = service.mediaType === 'image' && service.image?.startsWith('/images/');
+const allFields = [...(service.fields || [])].sort((a, b) => a.order - b.order);
+const orderedFields = allFields.filter((field) => field.visible);
+const valueFor = (field: DisplayFieldDefinition) =>
+  field.builtin
+    ? String(service[field.id as 'category' | 'summary' | 'description' | 'suitableFor' | 'notes'] || '')
+    : String(service.customFields?.[field.id] || '');
+const categoryField = allFields.find((field) => field.id === 'category');
+const showCategory = categoryField?.visible !== false;
+const cardFields = orderedFields.filter((field) => field.id !== 'category' && field.placement === 'card' && valueFor(field));
+const detailFields = orderedFields.filter((field) => field.id !== 'category' && field.placement === 'details' && valueFor(field));
+---
+<article class="service-card-wrap" data-reveal-item hidden={hidden}>
+  <button class="card service-card" type="button" data-dialog-open={`service-${service.slug}`} aria-haspopup="dialog" data-analytics-event="service_open" data-analytics-label={service.slug}>
+    {hasImage ? (
+      <span class="icon-box service-media service-media-image">
+        <img data-service-media-image src={service.image} alt={`صورة توضيحية لخدمة ${service.name}`} width="1600" height="900" loading="lazy" decoding="async" />
+        <span class="service-media-fallback" data-service-media-fallback hidden><Icon name={service.icon || 'sparkles'} size={27} /></span>
+      </span>
+    ) : <span class="icon-box service-media"><Icon name={service.icon || 'sparkles'} size={27} /></span>}
+    {showCategory && categoryField?.placement === 'card' && <span class="pill service-category">{service.category}</span>}
+    <strong class="card-title">{service.name}</strong>
+    {cardFields.map((field) => (
+      <span class:list={['service-card-extra', { muted: field.id === 'summary' }]}>
+        <b>{field.label}</b><span>{valueFor(field)}</span>
+      </span>
+    ))}
+    {service.placeholder && <span class="pill placeholder-pill">خدمة تجريبية</span>}
+    <span class="card-link">عرض التفاصيل <span aria-hidden="true">←</span></span>
+  </button>
+  <dialog class="content-dialog" id={`service-${service.slug}`} aria-labelledby={`service-title-${service.slug}`}>
+    <div class="dialog-shell">
+      <div class="dialog-header">
+        <div>{showCategory && categoryField?.placement === 'details' && <span class="pill">{service.category}</span>}<h2 id={`service-title-${service.slug}`}>{service.name}</h2></div>
+        <button class="icon-button" type="button" data-dialog-close aria-label="إغلاق نافذة تفاصيل الخدمة"><Icon name="close" size={22} /></button>
+      </div>
+      {hasImage && (
+        <div class="dialog-service-media">
+          <img data-service-media-image src={service.image} alt={`صورة توضيحية لخدمة ${service.name}`} width="960" height="560" loading="lazy" decoding="async" />
+          <span class="service-dialog-fallback" data-service-media-fallback hidden><Icon name={service.icon || 'sparkles'} size={38} /><span>تعذر تحميل الصورة، تم استخدام الأيقونة البديلة.</span></span>
+        </div>
+      )}
+      <div class="dialog-body">
+        {detailFields.length > 0 && <dl class="detail-list">
+          {detailFields.map((field) => <div><dt>{field.label}</dt><dd>{valueFor(field)}</dd></div>)}
+        </dl>}
+        <div class="notice notice-info">تُحدد الملاءمة بعد مراجعة الاحتياج، ولا توجد نتيجة مضمونة لجميع الأشخاص.</div>
+        <button class="button button-primary" type="button" data-service-request={service.slug}>{requestLabel}</button>
+      </div>
+    </div>
+  </dialog>
+</article>

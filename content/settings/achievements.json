@@ -1,0 +1,227 @@
+[
+  {
+    "id": "ajaza-jamaya-fy-altjmyl-qsm-alanaya-balbshra",
+    "title": "إجازة جامعية في التجميل — قسم العناية بالبشرة",
+    "year": "2025",
+    "description": "المؤهل الجامعي الأساسي في مجال التجميل والعناية بالبشرة. تخرج بمعدل تراكمي 89%، وحصل على درجة امتياز في مشروع التخرج.",
+    "image": "/images/placeholders/certificate.svg",
+    "fields": [
+      {
+        "id": "year",
+        "label": "السنة",
+        "type": "text",
+        "placement": "card",
+        "required": false,
+        "visible": true,
+        "builtin": true,
+        "order": 10
+      },
+      {
+        "id": "description",
+        "label": "الوصف",
+        "type": "textarea",
+        "placement": "card",
+        "required": false,
+        "visible": true,
+        "builtin": true,
+        "order": 20
+      },
+      {
+        "id": "custom-field-1",
+        "label": "اسم الجهة",
+        "type": "textarea",
+        "placement": "card",
+        "required": false,
+        "visible": true,
+        "builtin": false,
+        "order": 30
+      }
+    ],
+    "customFields": {
+      "custom-field-1": "جامعة الحواش الخاصة"
+    },
+    "placeholder": false,
+    "order": 10,
+    "visible": true
+  },
+  {
+    "id": "anjaz-akadymy-fy-alsna-alrabaa",
+    "title": "إنجاز أكاديمي في السنة الرابعة",
+    "year": "2025",
+    "description": "حقق المركز الأول على دفعته في السنة الرابعة، والمركز الثاني في السنة الثالثة.",
+    "image": "/images/uploads/1785014889925-1784986818272.jpg",
+    "fields": [
+      {
+        "id": "year",
+        "label": "السنة",
+        "type": "text",
+        "placement": "card",
+        "required": false,
+        "visible": true,
+        "builtin": true,
+        "order": 10
+      },
+      {
+        "id": "description",
+        "label": "الوصف",
+        "type": "textarea",
+        "placement": "card",
+        "required": false,
+        "visible": true,
+        "builtin": true,
+        "order": 20
+      },
+      {
+        "id": "custom-field-1",
+        "label": "اسم الجهة",
+        "type": "textarea",
+        "placement": "card",
+        "required": false,
+        "visible": true,
+        "builtin": false,
+        "order": 30
+      }
+    ],
+    "customFields": {
+      "custom-field-1": "جامعة الحواش"
+    },
+    "placeholder": false,
+    "order": 20,
+    "visible": true
+  },
+  {
+    "id": "shhada-fy-altjmyl-allajrahy",
+    "title": "شهادة في التجميل اللاجراحي",
+    "year": "2026",
+    "description": "بإشراف الدكتورة ريم رحمة، وهي عبارة عن تدريب تناول موضوعات في تقنيات التجميل غير الجراحي. تعرض الشهادة بوصفها تدريباً مهنياً، ولا تُستخدم وحدها لإثبات ترخيص إجراء الحقن أو أي ممارسة طبية.",
+    "image": "/images/uploads/1785014889743-1784986818161.jpg",
+    "fields": [
+      {
+        "id": "year",
+        "label": "السنة",
+        "type": "text",
+        "placement": "card",
+        "required": false,
+        "visible": true,
+        "builtin": true,
+        "order": 10
+      },
+      {
+        "id": "description",
+        "label": "الوصف",
+        "type": "textarea",
+        "placement": "card",
+        "required": false,
+        "visible": true,
+        "builtin": true,
+        "order": 20
+      },
+      {
+        "id": "custom-field-1",
+        "label": "اسم الجهة",
+        "type": "textarea",
+        "placement": "card",
+        "required": false,
+        "visible": true,
+        "builtin": false,
+        "order": 30
+      }
+    ],
+    "customFields": {
+      "custom-field-1": "For Help Team"
+    },
+    "placeholder": false,
+    "order": 30,
+    "visible": true
+  },
+  {
+    "id": "shhada-fy-tqnya-almyzwthyraby-walanaya-balbshra-wtjdyd-shbabha",
+    "title": "شهادة في تقنية الميزوثيرابي والعناية بالبشرة وتجديد شبابها",
+    "year": "2025",
+    "description": "بإشراف الدكتور أيهم النقري، وهي عبارة عن دريب في موضوعات الميزوثيرابي وبروتوكولات العناية بالبشرة وتجديد مظهرها. لا تُحوّل إلى خدمة معلنة قبل التحقق من الترخيص ونطاق الممارسة والإشراف.",
+    "image": "/images/uploads/1785014889784-1784986818223.jpg",
+    "fields": [
+      {
+        "id": "year",
+        "label": "السنة",
+        "type": "text",
+        "placement": "card",
+        "required": false,
+        "visible": true,
+        "builtin": true,
+        "order": 10
+      },
+      {
+        "id": "description",
+        "label": "الوصف",
+        "type": "textarea",
+        "placement": "card",
+        "required": false,
+        "visible": true,
+        "builtin": true,
+        "order": 20
+      },
+      {
+        "id": "custom-field-1",
+        "label": "اسم الجهة",
+        "type": "textarea",
+        "placement": "details",
+        "required": false,
+        "visible": true,
+        "builtin": false,
+        "order": 30
+      }
+    ],
+    "customFields": {
+      "custom-field-1": "عيادة كوزمو للأمراض الجلدية والتجميل"
+    },
+    "placeholder": false,
+    "order": 40,
+    "visible": true
+  },
+  {
+    "id": "dwra-tdrybya-fy-hqn-albwtwks-walfylr",
+    "title": "دورة تدريبية في حقن البوتوكس والفيلر",
+    "year": "2025",
+    "description": "بإشراف الدكتور أيهم النقري، وهي عبارة عن دورة تدريبية تناولت مبادئ وتقنيات البوتوكس والفيلر. الحقن إجراءات طبية عالية الحساسية؛ يجب ألا توصف الشهادة بأنها اعتماد للممارسة المستقلة.",
+    "image": "/images/uploads/1785014889848-1784986818248.jpg",
+    "fields": [
+      {
+        "id": "year",
+        "label": "السنة",
+        "type": "text",
+        "placement": "card",
+        "required": false,
+        "visible": true,
+        "builtin": true,
+        "order": 10
+      },
+      {
+        "id": "description",
+        "label": "الوصف",
+        "type": "textarea",
+        "placement": "card",
+        "required": false,
+        "visible": true,
+        "builtin": true,
+        "order": 20
+      },
+      {
+        "id": "custom-field-1",
+        "label": "اسم الجهة",
+        "type": "textarea",
+        "placement": "details",
+        "required": false,
+        "visible": true,
+        "builtin": false,
+        "order": 30
+      }
+    ],
+    "customFields": {
+      "custom-field-1": "عيادة كوزمو للأمراض الجلدية والتجميل"
+    },
+    "placeholder": false,
+    "order": 50,
+    "visible": true
+  }
+]
