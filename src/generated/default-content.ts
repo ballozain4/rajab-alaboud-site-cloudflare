@@ -1727,7 +1727,7 @@ export const DEFAULT_CONTENT = {
           }
         }
       ],
-      "updatedAt": "2026-07-30T02:03:55.295Z"
+      "updatedAt": "2026-07-30T02:03:57.663Z"
     }
   ],
   "achievements": [
