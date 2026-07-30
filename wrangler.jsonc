@@ -5,9 +5,14 @@
   "compatibility_date": "2026-07-29",
   "compatibility_flags": ["nodejs_compat"],
   "workers_dev": true,
-  // D1 binding removed temporarily to allow deployment without a configured
-  // D1 database. If you have a D1 database, replace this comment with the
-  // d1_databases array and set "database_id" to your database's ID.
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "rajab-consultations",
+      "database_id": "53425285-c402-4143-9aa9-b51e0b68edb8",
+      "migrations_dir": "migrations"
+    }
+  ],
   "vars": {
     "SITE_URL": "https://rajab-alaboud-site-cloudflare.workers.dev",
     "NOTIFICATION_EMAIL": "rajabalaboud@gmail.com",
