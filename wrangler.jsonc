@@ -13,6 +13,13 @@
       "migrations_dir": "migrations"
     }
   ],
+  "kv_namespaces": [
+    {
+      "binding": "SESSION",
+      "id": "54c32b67bcb14110a428d77d4e3a2141",
+      "title": "rajab-alaboud-site-cloudflare-session"
+    }
+  ],
   "vars": {
     "SITE_URL": "https://rajab-alaboud-site-cloudflare.workers.dev",
     "NOTIFICATION_EMAIL": "rajabalaboud@gmail.com",
