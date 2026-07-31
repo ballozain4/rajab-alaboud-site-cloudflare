@@ -3,7 +3,7 @@ export const DEFAULT_CONTENT = {
   "site": {
     "name": "رجب العبود",
     "title": "اختصاصي في التجميل والعناية بالبشرة",
-    "phoneDisplay": "0980 623 852",
+    "phoneDisplay": "0980623852",
     "phoneLink": "+963980623852",
     "whatsapp": "963980623852",
     "email": "alabboudrajab@gmail.com",
@@ -1727,7 +1727,7 @@ export const DEFAULT_CONTENT = {
           }
         }
       ],
-      "updatedAt": "2026-07-30T02:03:57.663Z"
+      "updatedAt": "2026-07-31T21:43:13.919Z"
     }
   ],
   "achievements": [
