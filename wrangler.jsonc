@@ -28,7 +28,7 @@
   "vars": {
     "SITE_URL": "https://rajab-alaboud.rajabalaboud.workers.dev",
     "NOTIFICATION_EMAIL": "alabboudrajab@gmail.com",
-    "NOTIFICATION_EMAIL_FROM": "onboarding@resend.dev",
+    "NOTIFICATION_EMAIL_FROM": "alabboudrajab@gmail.com",
     "PUBLIC_TURNSTILE_SITE_KEY": "0x4AAAAAAEBcMSmKrGqhLG8D",
     "ALLOW_DEMO_SUBMISSIONS": "false"
   }

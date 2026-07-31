@@ -201,7 +201,7 @@ export async function notifyByEmail(
   ).trim();
 
   const notificationEmailFrom = (
-    env.NOTIFICATION_EMAIL_FROM || 'onboarding@resend.dev'
+    env.NOTIFICATION_EMAIL_FROM || 'alabboudrajab@gmail.com'
   ).trim();
 
   if (!env.RESEND_TOKEN || !notificationEmail || !notificationEmailFrom) {
