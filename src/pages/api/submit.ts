@@ -191,51 +191,104 @@ async function validateSubmission(
   };
 }
 
-export async function notifyByEmail(env: CloudflareEnv, reference: string, input: SubmissionInput) {
-  const notificationEmail = (env.NOTIFICATION_EMAIL || 'alabboudrajab@gmail.com').trim();
-  const notificationEmailFrom = (env.NOTIFICATION_EMAIL_FROM || 'consultations@your-domain.example').trim();
-  if (!env.EMAIL || !notificationEmail || !notificationEmailFrom) return 'not-configured' as const;
-  if (notificationEmailFrom.includes('your-domain.example') || /@(gmail|yahoo|hotmail|outlook|live|icloud)\.com$/i.test(notificationEmailFrom)) {
-    console.warn('EMAIL NOT CONFIGURED: unsupported sender domain', notificationEmailFrom);
+export async function notifyByEmail(
+  env: CloudflareEnv,
+  reference: string,
+  input: SubmissionInput
+) {
+  const notificationEmail = (
+    env.NOTIFICATION_EMAIL || 'alabboudrajab@gmail.com'
+  ).trim();
+
+  const notificationEmailFrom = (
+    env.NOTIFICATION_EMAIL_FROM || 'onboarding@resend.dev'
+  ).trim();
+
+  if (!env.RESEND_TOKEN || !notificationEmail || !notificationEmailFrom) {
     return 'not-configured' as const;
   }
+
   try {
-    await env.EMAIL.send({
-      to: notificationEmail,
-      from: notificationEmailFrom,
-      subject: `طلب استشارة جديد — ${reference}`,
-      text: [
-        `رقم الطلب: ${reference}`,
-        `الاسم: ${input.name}`,
-        `الهاتف: ${input.phoneNormalized}`,
-        `المحافظة: ${input.city}`,
-        `الموضوع: ${input.subject}`,
-        `الوصف: ${input.description}`,
-        ...Object.entries(input.extraFields).map(([key, value]) => `${key}: ${String(value)}`),
-        `المصدر: ${input.source}`
-      ].join('\n'),
-      html: `<div dir="rtl" lang="ar">
-        <h2>طلب استشارة جديد</h2>
-        <p><strong>رقم الطلب:</strong> ${htmlEscape(reference)}</p>
-        <p><strong>الاسم:</strong> ${htmlEscape(input.name)}</p>
-        <p><strong>الهاتف:</strong> ${htmlEscape(input.phoneNormalized)}</p>
-        <p><strong>المحافظة:</strong> ${htmlEscape(input.city)}</p>
-        <p><strong>الموضوع:</strong> ${htmlEscape(input.subject)}</p>
-        <p><strong>الوصف:</strong><br>${htmlEscape(input.description).replaceAll('\n', '<br>')}</p>
-        ${Object.entries(input.extraFields).map(([key, value]) => `<p><strong>${htmlEscape(key)}:</strong> ${htmlEscape(String(value))}</p>`).join('')}
-        <p><strong>المصدر:</strong> ${htmlEscape(input.source)}</p>
-      </div>`
+    const response = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${env.RESEND_TOKEN}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        from: notificationEmailFrom,
+        to: notificationEmail,
+        subject: `طلب استشارة جديد — ${reference}`,
+        text: [
+          `رقم الطلب: ${reference}`,
+          `الاسم: ${input.name}`,
+          `الهاتف: ${input.phoneNormalized}`,
+          `المحافظة: ${input.city}`,
+          `الخدمة: ${input.serviceName}`,
+          `الموضوع: ${input.subject}`,
+          `الوصف: ${input.description}`,
+          `المصدر: ${input.source}`
+        ].join('\n'),
+        html: `
+        <div dir="rtl" lang="ar">
+          <h2>طلب استشارة جديد</h2>
+
+          <p>
+            <strong>رقم الطلب:</strong>
+            ${htmlEscape(reference)}
+          </p>
+
+          <p>
+            <strong>الاسم:</strong>
+            ${htmlEscape(input.name)}
+          </p>
+
+          <p>
+            <strong>الهاتف:</strong>
+            ${htmlEscape(input.phoneNormalized)}
+          </p>
+
+          <p>
+            <strong>المحافظة:</strong>
+            ${htmlEscape(input.city)}
+          </p>
+
+          <p>
+            <strong>الخدمة:</strong>
+            ${htmlEscape(input.serviceName || '-')}
+          </p>
+
+          <p>
+            <strong>الموضوع:</strong>
+            ${htmlEscape(input.subject)}
+          </p>
+
+          <p>
+            <strong>الوصف:</strong><br>
+            ${htmlEscape(input.description).replaceAll('\n', '<br>')}
+          </p>
+
+          <p>
+            <strong>المصدر:</strong>
+            ${htmlEscape(input.source)}
+          </p>
+
+        </div>
+        `
+      })
     });
-    return 'sent' as const;
-  } catch (err) {
-    try {
-      const msg = String(err && (err as Error).message ? (err as Error).message : err);
-      console.error('EMAIL SEND ERROR:', msg);
-      return (`failed:${msg.slice(0,200)}`) as const;
-    } catch (e) {
-      console.error('EMAIL SEND ERROR (unknown):', err);
-      return 'failed' as const;
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error('RESEND ERROR:', errorText);
+      return `failed:${errorText.slice(0, 200)}` as const;
     }
+
+    return 'sent' as const;
+
+  } catch (error) {
+    console.error('EMAIL SEND ERROR:', error);
+    return 'failed' as const;
   }
 }
 
@@ -320,7 +373,11 @@ export const POST: APIRoute = async ({ request, locals }) => {
       ).bind(id, createdAt)
     ]);
 
-    const emailStatus = allowDemo ? 'demo' : (env.EMAIL ? await notifyByEmail(env, reference, input) : 'manual');
+    const emailStatus = allowDemo
+  ? 'demo'
+  : (env.RESEND_TOKEN
+      ? await notifyByEmail(env, reference, input)
+      : 'manual');
     await database.prepare(
       'UPDATE consultations SET notification_email_status = ?, updated_at = ? WHERE id = ?'
     ).bind(emailStatus, new Date().toISOString(), id).run();
