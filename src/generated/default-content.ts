@@ -2097,144 +2097,6 @@ export const DEFAULT_CONTENT = {
       "visible": true
     },
     {
-      "slug": "altqshyr-alkymyayy-alsthy-copy",
-      "name": "التقشير الميكانيكي السطحي بالكريستال",
-      "category": "إجراء",
-      "summary": "تقشير ميكانيكي لطيف يزيل جزءاً من الطبقة الخارجية المتقرنة لتحسين نعومة البشرة وإشراقتها.",
-      "description": "يُستخدم جهاز مخصص يمر على سطح البشرة لإزالة الخلايا المتقرنة بصورة تدريجية، باستخدام بلورات دقيقة أو رأس ماسي مع شفط مضبوط، وفق نوع الجهاز.\n\nقد يساعد الإجراء في تحسين الخشونة والبهتان وبعض التصبغات السطحية الخفيفة ومنح البشرة ملمساً أكثر نعومة. إلا أن تأثيره يبقى سطحياً، ولذلك لا يُتوقع منه معالجة الندبات العميقة أو التجاعيد الواضحة أو التصبغات العميقة.\n\nتستغرق معالجة الوجه عادة مدة قصيرة، ولا تتطلب غالباً فترة تعافٍ طويلة، لكن معظم الأشخاص يحتاجون إلى سلسلة جلسات للحصول على تحسن واضح.",
-      "suitableFor": "قد تناسب البشرة الباهتة أو الخشنة، والتصبغات السطحية الخفيفة، وعدم انتظام الملمس البسيط، ومن يرغب في إجراء سطحي بفترة تعافٍ محدودة.",
-      "notes": "قد يظهر احمرار أو تورم خفيف أو حساسية مؤقتة تشبه تأثير التعرض للرياح أو الشمس. وقد لا تكون مناسبة عند وجود حب شباب التهابي نشط، أو وردية ملتهبة، أو أكزيما، أو جروح، أو هربس نشط، أو قابلية مرتفعة للتندب.\n\nيجب إبلاغ الطبيب عن استخدام الإيزوتريتينوين، وتاريخ الهربس، وجميع الأدوية والمكملات. وتشير الأكاديمية الأمريكية للأمراض الجلدية إلى احتمال ارتفاع خطر المضاعفات والتندب عند إجراء التقشير الميكانيكي بعد استخدام الإيزوتريتينوين بفترة غير كافية.",
-      "fields": [
-        {
-          "id": "category",
-          "label": "التصنيف",
-          "type": "text",
-          "placement": "card",
-          "required": true,
-          "visible": true,
-          "builtin": true,
-          "order": 10
-        },
-        {
-          "id": "summary",
-          "label": "الملخص",
-          "type": "textarea",
-          "placement": "card",
-          "required": true,
-          "visible": true,
-          "builtin": true,
-          "order": 20
-        },
-        {
-          "id": "description",
-          "label": "الوصف التفصيلي",
-          "type": "textarea",
-          "placement": "details",
-          "required": true,
-          "visible": true,
-          "builtin": true,
-          "order": 30
-        },
-        {
-          "id": "suitableFor",
-          "label": "لمن قد تناسب",
-          "type": "textarea",
-          "placement": "details",
-          "required": false,
-          "visible": true,
-          "builtin": true,
-          "order": 40
-        },
-        {
-          "id": "notes",
-          "label": "ملاحظات وتنبيهات",
-          "type": "textarea",
-          "placement": "details",
-          "required": false,
-          "visible": true,
-          "builtin": true,
-          "order": 50
-        }
-      ],
-      "customFields": {},
-      "mediaType": "image",
-      "icon": "leaf",
-      "image": "/images/uploads/1785376559800-pexels-kerimeveyik-22589363.jpg",
-      "featured": true,
-      "placeholder": false,
-      "order": 30,
-      "visible": true
-    },
-    {
-      "slug": "altqshyr-alkymyayy-alsthy",
-      "name": "التقشير الكيميائي السطحي",
-      "category": "إجراء",
-      "summary": "إجراء يستخدم محلولاً كيميائياً مدروس التركيز لتقشير الطبقات السطحية من البشرة وتحسين ملمسها وتجانس لونها.",
-      "description": "يعمل التقشير الكيميائي السطحي على إحداث تقشير مضبوط في الطبقات الخارجية من الجلد، باستخدام مادة ونسبة ومدة تطبيق يتم اختيارها وفق نوع البشرة والمشكلة المستهدفة.\n\nقد يساعد في تحسين البهتان والخشونة والتصبغات السطحية وآثار الشمس وبعض حالات حب الشباب الخفيف وآثاره اللونية، كما قد يقلل مظهر الخطوط الدقيقة بصورة محدودة. وقد تحتاج النتيجة إلى سلسلة جلسات بدلاً من جلسة واحدة. وتشير الأكاديمية الأمريكية للأمراض الجلدية إلى استخدام التقشير لبعض أنواع حب الشباب والتصبغات والبقع والخطوط الدقيقة والجلد المتضرر من الشمس.",
-      "suitableFor": "قد تناسب من يعاني من عدم تجانس لون البشرة، أو تصبغات سطحية، أو آثار سطحية بعد الحبوب، أو خشونة وبهتان، أو علامات خفيفة مرتبطة بالتعرض للشمس.",
-      "notes": "قد يحدث احمرار أو شعور بالحرقة أو الجفاف أو التقشر لعدة أيام. وتشمل المخاطر المحتملة التصبغ التالي للالتهاب، خصوصاً لدى أصحاب البشرة الأكثر قابلية للتصبغ، إضافة إلى تنشيط الهربس أو العدوى أو التندب في حالات نادرة.\n\nيجب تقييم وجود التهابات أو جروح أو هربس نشط، وتاريخ التندب، والأدوية المستخدمة، والإيزوتريتينوين السابق أو الحالي، والحمل أو الرضاعة عند اختيار المادة. وتُعد الحماية اليومية من الشمس والالتزام بتعليمات العناية اللاحقة جزءاً أساسياً من الإجراء. وقد يستغرق التعافي من التقشير السطحي نحو يوم إلى سبعة أيام بحسب المادة والتركيز والاستجابة الفردية.\n\nيجب عدم استخدام محاليل التقشير القوية منزلياً دون إشراف مختص، نظراً لاحتمال حدوث حروق وإصابات جلدية خطرة.",
-      "fields": [
-        {
-          "id": "category",
-          "label": "التصنيف",
-          "type": "text",
-          "placement": "card",
-          "required": true,
-          "visible": true,
-          "builtin": true,
-          "order": 10
-        },
-        {
-          "id": "summary",
-          "label": "الملخص",
-          "type": "textarea",
-          "placement": "card",
-          "required": true,
-          "visible": true,
-          "builtin": true,
-          "order": 20
-        },
-        {
-          "id": "description",
-          "label": "الوصف التفصيلي",
-          "type": "textarea",
-          "placement": "details",
-          "required": true,
-          "visible": true,
-          "builtin": true,
-          "order": 30
-        },
-        {
-          "id": "suitableFor",
-          "label": "لمن قد تناسب",
-          "type": "textarea",
-          "placement": "details",
-          "required": false,
-          "visible": true,
-          "builtin": true,
-          "order": 40
-        },
-        {
-          "id": "notes",
-          "label": "ملاحظات وتنبيهات",
-          "type": "textarea",
-          "placement": "details",
-          "required": false,
-          "visible": true,
-          "builtin": true,
-          "order": 50
-        }
-      ],
-      "customFields": {},
-      "mediaType": "image",
-      "icon": "leaf",
-      "image": "/images/uploads/1785376559827-what-is-a-chemical-peel-e1517852109529.jpg",
-      "featured": true,
-      "placeholder": false,
-      "order": 40,
-      "visible": true
-    },
-    {
       "slug": "alwkhz-aldqyq-lthfyz-alkwlajyn-microneedling-dermapen",
       "name": "الوخز الدقيق لتحفيز الكولاجين (Microneedling / Dermapen)",
       "category": "إجراء",
@@ -2300,7 +2162,7 @@ export const DEFAULT_CONTENT = {
       "image": "/images/uploads/1785376559852-look-studio-htxyytr9304-unsplash.jpg",
       "featured": true,
       "placeholder": false,
-      "order": 50,
+      "order": 30,
       "visible": true
     },
     {
@@ -2369,7 +2231,7 @@ export const DEFAULT_CONTENT = {
       "image": "/images/uploads/1785376559882-farhad-ibrahimzade--a0jyqvtm9m-unsplash.jpg",
       "featured": true,
       "placeholder": false,
-      "order": 60,
+      "order": 40,
       "visible": true
     },
     {
@@ -2438,7 +2300,7 @@ export const DEFAULT_CONTENT = {
       "image": "/images/uploads/1785376559903-mina-rad-qehqlhz9toc-unsplash.jpg",
       "featured": true,
       "placeholder": false,
-      "order": 70,
+      "order": 50,
       "visible": true
     },
     {
@@ -2507,7 +2369,7 @@ export const DEFAULT_CONTENT = {
       "image": "/images/uploads/1785376559928-co-to-jest-mezoterapia-twarzy-1.jpg",
       "featured": true,
       "placeholder": false,
-      "order": 80,
+      "order": 60,
       "visible": true
     },
     {
@@ -2576,7 +2438,7 @@ export const DEFAULT_CONTENT = {
       "image": "/images/uploads/1785376559948-pexels-denys-12115040.jpg",
       "featured": true,
       "placeholder": false,
-      "order": 90,
+      "order": 70,
       "visible": true
     }
   ],

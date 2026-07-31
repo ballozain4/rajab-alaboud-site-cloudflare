@@ -28,9 +28,8 @@
   "vars": {
     "SITE_URL": "https://rajab-alaboud.rajabalaboud.workers.dev",
     "NOTIFICATION_EMAIL": "alabboudrajab@gmail.com",
-    "NOTIFICATION_EMAIL_FROM": "consultations@your-domain.example",
+    "NOTIFICATION_EMAIL_FROM": "onboarding@resend.dev",
     "PUBLIC_TURNSTILE_SITE_KEY": "0x4AAAAAAEBcMSmKrGqhLG8D",
-    "RESEND_TOKEN": "temporary-resend-token-20260731",
     "ALLOW_DEMO_SUBMISSIONS": "false"
   }
 }
