@@ -56,6 +56,7 @@ interface CloudflareEnv {
   NOTIFICATION_EMAIL?: string;
   NOTIFICATION_EMAIL_FROM?: string;
   SITE_URL?: string;
+  RESEND_TOKEN?: string;
   ALLOW_DEMO_SUBMISSIONS?: string;
 }
 

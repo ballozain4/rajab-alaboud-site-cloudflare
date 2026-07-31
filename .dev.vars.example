@@ -3,7 +3,7 @@
 ADMIN_PASSWORD=replace-with-a-strong-password-at-least-16-characters
 SESSION_SECRET=replace-with-a-random-secret-at-least-32-characters
 TURNSTILE_SECRET_KEY=
-NOTIFICATION_EMAIL=rajabalaboud@gmail.com
-NOTIFICATION_EMAIL_FROM=
+NOTIFICATION_EMAIL=alabboudrajab@gmail.com
+NOTIFICATION_EMAIL_FROM=consultations@your-domain.example
 SITE_URL=http://127.0.0.1:4321
 ALLOW_DEMO_SUBMISSIONS=true

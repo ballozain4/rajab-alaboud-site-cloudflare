@@ -6,7 +6,7 @@ export const DEFAULT_CONTENT = {
     "phoneDisplay": "0980 623 852",
     "phoneLink": "+963980623852",
     "whatsapp": "963980623852",
-    "email": "rajabalaboud@gmail.com",
+    "email": "alabboudrajab@gmail.com",
     "facebook": "https://www.facebook.com/share/1BsPgTx1cu/",
     "instagram": "https://www.instagram.com/spec.rajabalaboud?igsh=dW9hZnIwbHAxZ2g=",
     "portrait": "/images/uploads/1785015933577-rajab-alaboud-portrait.png",
@@ -3447,7 +3447,7 @@ export const DEFAULT_CONTENT = {
         },
         {
           "heading": "11. حقوق المستخدم والتواصل",
-          "body": "يمكن الاستفسار عن البيانات، أو طلب تصحيحها أو حذفها حيث يكون ذلك ممكناً، عبر البريد الإلكتروني rajabalaboud@gmail.com أو رقم واتساب الرسمي، مع ذكر رقم المتابعة للتحقق من الطلب. قد نطلب معلومات محدودة للتحقق من هوية مقدم الطلب قبل تنفيذ الإجراء."
+          "body": "يمكن الاستفسار عن البيانات، أو طلب تصحيحها أو حذفها حيث يكون ذلك ممكناً، عبر البريد الإلكتروني alabboudrajab@gmail.com أو رقم واتساب الرسمي، مع ذكر رقم المتابعة للتحقق من الطلب. قد نطلب معلومات محدودة للتحقق من هوية مقدم الطلب قبل تنفيذ الإجراء."
         },
         {
           "heading": "12. الروابط الخارجية",

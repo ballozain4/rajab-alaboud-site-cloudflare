@@ -16,8 +16,13 @@ export const jsonResponse = (body: unknown, status = 200, extraHeaders: HeadersI
 
 // Astro 6+ removes `Astro.locals.runtime.env`. Cloudflare bindings are exposed
 // directly by the runtime module, so do not read the legacy locals property.
-export const runtimeEnv = (_locals: unknown): CloudflareEnv =>
-  cloudflareBindings as unknown as CloudflareEnv;
+export const runtimeEnv = (_locals: unknown): CloudflareEnv => {
+  const cloudflareEnv = cloudflareBindings as unknown as CloudflareEnv;
+  const nodeEnv = typeof process !== 'undefined' && process.env
+    ? (process.env as Partial<CloudflareEnv>)
+    : {};
+  return { ...nodeEnv, ...cloudflareEnv } as CloudflareEnv;
+};
 
 export const requireDatabase = (locals: APIContext['locals']): D1Database => {
   const database = runtimeEnv(locals).DB;

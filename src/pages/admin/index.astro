@@ -8,6 +8,7 @@ import {
   SYRIAN_PROVINCES
 } from '../../lib/consultation-options';
 import { getPublicContent } from '../../lib/server-content';
+import { runtimeEnv } from '../../lib/cloudflare-runtime';
 
 export const prerender = false;
 Astro.response.headers.set('Cache-Control', 'no-store');
@@ -15,6 +16,10 @@ Astro.response.headers.set('X-Robots-Tag', 'noindex, nofollow');
 const content = await getPublicContent();
 const consultationFieldLabels = Object.fromEntries(
   content.fieldModel.consultationFields.map((field) => [field.id, field.label])
+);
+const env = runtimeEnv(Astro.locals);
+const adminConfigured = Boolean(
+  env.ADMIN_PASSWORD && env.ADMIN_PASSWORD.length >= 16 && env.SESSION_SECRET && env.SESSION_SECRET.length >= 32
 );
 ---
 <!doctype html>
@@ -36,6 +41,13 @@ const consultationFieldLabels = Object.fromEntries(
         <p class="admin-kicker">منطقة خاصة</p>
         <h1 id="login-title">إدارة طلبات الاستشارة</h1>
         <p>أدخل كلمة المرور الإدارية. لا تُحفظ كلمة المرور داخل ملفات الموقع.</p>
+        {!adminConfigured ? (
+          <div class="notice notice-warning admin-config-warning">
+            <strong>تنبيه:</strong> لم تُضبط بيانات دخول لوحة التحكم بعد. لكي يعمل تسجيل الدخول، اضبط أسرار Worker التالية في Cloudflare:
+            <code>ADMIN_PASSWORD</code> و
+            <code>SESSION_SECRET</code> بطول مناسب، ثم أعد النشر.
+          </div>
+        ) : null}
         <form data-login-form>
           <label>
             <span>كلمة المرور</span>

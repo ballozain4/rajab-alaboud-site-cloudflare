@@ -191,12 +191,18 @@ async function validateSubmission(
   };
 }
 
-async function notifyByEmail(env: CloudflareEnv, reference: string, input: SubmissionInput) {
-  if (!env.EMAIL || !env.NOTIFICATION_EMAIL || !env.NOTIFICATION_EMAIL_FROM) return 'not-configured' as const;
+export async function notifyByEmail(env: CloudflareEnv, reference: string, input: SubmissionInput) {
+  const notificationEmail = (env.NOTIFICATION_EMAIL || 'alabboudrajab@gmail.com').trim();
+  const notificationEmailFrom = (env.NOTIFICATION_EMAIL_FROM || 'consultations@your-domain.example').trim();
+  if (!env.EMAIL || !notificationEmail || !notificationEmailFrom) return 'not-configured' as const;
+  if (notificationEmailFrom.includes('your-domain.example') || /@(gmail|yahoo|hotmail|outlook|live|icloud)\.com$/i.test(notificationEmailFrom)) {
+    console.warn('EMAIL NOT CONFIGURED: unsupported sender domain', notificationEmailFrom);
+    return 'not-configured' as const;
+  }
   try {
     await env.EMAIL.send({
-      to: env.NOTIFICATION_EMAIL,
-      from: env.NOTIFICATION_EMAIL_FROM,
+      to: notificationEmail,
+      from: notificationEmailFrom,
       subject: `طلب استشارة جديد — ${reference}`,
       text: [
         `رقم الطلب: ${reference}`,
@@ -221,8 +227,15 @@ async function notifyByEmail(env: CloudflareEnv, reference: string, input: Submi
       </div>`
     });
     return 'sent' as const;
-  } catch {
-    return 'failed' as const;
+  } catch (err) {
+    try {
+      const msg = String(err && (err as Error).message ? (err as Error).message : err);
+      console.error('EMAIL SEND ERROR:', msg);
+      return (`failed:${msg.slice(0,200)}`) as const;
+    } catch (e) {
+      console.error('EMAIL SEND ERROR (unknown):', err);
+      return 'failed' as const;
+    }
   }
 }
 
@@ -307,7 +320,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
       ).bind(id, createdAt)
     ]);
 
-    const emailStatus = allowDemo ? 'demo' : await notifyByEmail(env, reference, input);
+    const emailStatus = allowDemo ? 'demo' : (env.EMAIL ? await notifyByEmail(env, reference, input) : 'manual');
     await database.prepare(
       'UPDATE consultations SET notification_email_status = ?, updated_at = ? WHERE id = ?'
     ).bind(emailStatus, new Date().toISOString(), id).run();

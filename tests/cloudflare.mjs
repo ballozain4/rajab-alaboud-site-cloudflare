@@ -75,7 +75,7 @@ assert.equal(wrangler.workers_dev, true);
 assert.equal('pages_build_output_dir' in wrangler, false);
 assert.equal(wrangler.d1_databases?.[0]?.binding, 'DB');
 assert.equal(wrangler.d1_databases?.[0]?.migrations_dir, 'migrations');
-assert.equal(wrangler.vars?.NOTIFICATION_EMAIL, 'rajabalaboud@gmail.com');
+assert.equal(wrangler.vars?.NOTIFICATION_EMAIL, 'alabboudrajab@gmail.com');
 assert.equal(wrangler.vars?.ALLOW_DEMO_SUBMISSIONS, 'false');
 
 await Promise.all([
@@ -118,7 +118,7 @@ const env = {
   DB: database,
   ADMIN_PASSWORD: 'strong-admin-password-2026',
   SESSION_SECRET: '0123456789abcdef0123456789abcdef0123456789abcdef',
-  NOTIFICATION_EMAIL: 'rajabalaboud@gmail.com',
+  NOTIFICATION_EMAIL: 'alabboudrajab@gmail.com',
   ALLOW_DEMO_SUBMISSIONS: 'true'
 };
 const locals = { runtime: { env } };

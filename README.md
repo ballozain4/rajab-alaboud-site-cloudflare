@@ -222,11 +222,11 @@ https://YOUR-WORKER.workers.dev/admin/
 يعمل حفظ الطلب وواتساب ولوحة `/admin/` من دون بريد. الإرسال الآلي يحتاج Binding باسم `EMAIL` ومرسلاً موثقاً، ثم:
 
 ```text
-NOTIFICATION_EMAIL=rajabalaboud@gmail.com
+NOTIFICATION_EMAIL=alabboudrajab@gmail.com
 NOTIFICATION_EMAIL_FROM=consultations@your-domain.example
 ```
 
-إذا لم يُضبط البريد تظهر الحالة `not-configured` ولا يفشل حفظ الطلب.
+يجب أن يكون عنوان `NOTIFICATION_EMAIL_FROM` من دومين موثَّق في Cloudflare Email Service. إذا لم يُضبط البريد تظهر الحالة `not-configured` ولا يفشل حفظ الطلب.
 
 ## بنية المشروع
 
