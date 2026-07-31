@@ -204,9 +204,15 @@ export async function notifyByEmail(
     env.NOTIFICATION_EMAIL_FROM || 'alabboudrajab@gmail.com'
   ).trim();
 
-  if (!env.RESEND_TOKEN || !notificationEmail || !notificationEmailFrom) {
-    return 'not-configured' as const;
-  }
+  if (!env.EMAIL || !notificationEmail || !notificationEmailFrom) {
+  console.log('EMAIL CONFIG CHECK', {
+    hasEmailBinding: Boolean(env.EMAIL),
+    notificationEmail,
+    notificationEmailFrom
+   });
+
+   return 'not-configured' as const;
+ }
 
   try {
     const response = await fetch('https://api.resend.com/emails', {
